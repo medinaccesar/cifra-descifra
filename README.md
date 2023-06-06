@@ -1,5 +1,5 @@
 # cifra-descifra
-Permite cifrar y descifrar archivos, permite ejecutarse en modo consola, en modo guiado y en modo gráfico. Por defecto en español pero admite otros idiomas.
+Permite cifrar y descifrar archivos, puede ejecutarse en modo consola, en modo guiado o en modo gráfico. Por defecto en español pero admite otros idiomas.
 
 # Requisitos
  Para las variables de entorno «python-dotenv», y si se quiere usar la interfaz gráfica «tkinter».        
