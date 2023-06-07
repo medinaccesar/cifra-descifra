@@ -1,7 +1,8 @@
 import gettext
 import locale
 import os
-
+from dotenv import load_dotenv
+load_dotenv() 
 localedir = 'locale'
 lang =  os.getenv('IDIOMA')
 

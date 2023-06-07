@@ -1,8 +1,11 @@
 import abc
 import os
+from dotenv import load_dotenv
+
 class ConexionBd(metaclass=abc.ABCMeta):   
     
     def __init__(self):
+        load_dotenv() 
         self.usuario = os.getenv('USUARIO_BD')
         self.contrasenna = os.getenv('CONTRASENNA_BD')
     
