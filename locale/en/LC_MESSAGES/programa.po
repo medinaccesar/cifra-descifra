@@ -1,0 +1,101 @@
+# Translations template for PROJECT.
+# Copyright (C) 2023 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-06-03 18:56+0200\n"
+"PO-Revision-Date: 2023-06-03 19:08+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
+
+#: cifradescifra.py:30
+msgid "Se ejecuta en modo consola"
+msgstr "Running in console mode"
+
+#: cifradescifra.py:36
+msgid "El archivo se ha cifrado correctamente."
+msgstr "The file has been successfully encrypted."
+
+#: cifradescifra.py:41 cifradescifra.py:67
+msgid "El archivo se ha descifrado correctamente."
+msgstr "The file has been successfully decrypted."
+
+#: cifradescifra.py:43
+msgid "No se especificó ninguna opción"
+msgstr "No option was specified"
+
+#: cifradescifra.py:49
+msgid "¿Desea cifrar o descifrar un archivo? (cifrar/descifrar) o (c/d): "
+msgstr "Do you want to encrypt or decrypt a file (cifrar/descifrar) or (c/d):"
+
+#: cifradescifra.py:62
+msgid "Introduce el nombre del archivo cifrado a descifrar: "
+msgstr "Enter the name of the encrypted file to decrypt: "
+
+#: cifradescifra.py:64
+msgid "Introduce el nombre del archivo descifrado que se va a generar: "
+msgstr "Enter the name of the decrypted file to generate:"
+
+#: cifradescifra.py:69
+msgid "La acción introducida no es válida"
+msgstr "The entered action is invalid."
+
+#: cifradescifra.py:78
+msgid "Descifrar archivo"
+msgstr "Decrypt file"
+
+#: cifradescifra.py:80
+msgid "Se ejecuta el entorno gráfico"
+msgstr "The graphical environment is running"
+
+#: cifradescifra.py:82
+msgid "Se ejecuta el modo guiado"
+msgstr "Guided mode is running"
+
+#: cifradescifra.py:84
+msgid "Muestra la versión del programa"
+msgstr "Displays the program version"
+
+#: utils/espannol_string_argparse.py:7
+msgid "muestra este mensaje de ayuda y sale"
+msgstr "show this help message and exit"
+
+#: utils/espannol_string_argparse.py:11
+msgid "Uso: "
+msgstr "Usage: "
+
+#: utils/espannol_string_argparse.py:12
+msgid "argumentos opcionales"
+msgstr "optional arguments"
+
+#: utils/espannol_string_argparse.py:14
+msgid "argumentos posicionales"
+msgstr "positional arguments"
+
+#: utils/espannol_string_argparse.py:15
+#, python-format
+msgid "los siguientes argumentos son requeridos: %s"
+msgstr "the following arguments are required: %s"
+
+#: utils/espannol_string_argparse.py:16
+msgid "muestra la versión del programa y sale"
+msgstr "show program version and exit"
+
+#: utils/espannol_string_argparse.py:17
+msgid "se espera un valor para el parámetro"
+msgstr "a value is expected for the parameter"
+
+#: utils/espannol_string_argparse.py:18
+msgid "se espera al menos un valor para el parámetro"
+msgstr "at least one value is expected for parameter"

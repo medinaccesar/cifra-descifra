@@ -19,3 +19,8 @@ argumentos opcionales:
   -a, --asesorado       Se ejecuta el modo guiado
   --version             Muestra la versión del programa
 ```
+# Líneas futuras
+
+1) Claves maestras temporales para permitir compartir archivos 
+2) Listado de los archivos cifrados 
+3) Aplicación móvil
