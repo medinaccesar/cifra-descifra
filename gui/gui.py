@@ -1,12 +1,11 @@
-import asyncio
 import threading
 from tkinter import *
 from tkinter.filedialog import askopenfilename
 from tkinter.font import Font
 import tkinter.messagebox as tkmb
 from tkinter.ttk import Progressbar
+from tkinter import PhotoImage
 from utils.locale_manager import _
-
 from service.cifradescifra_service import CifraDescifraArchivo
 from constantes import Configuracion as conf
 
@@ -20,6 +19,8 @@ class Gui(Frame):
         self._ruta_archivo = ''
         self.master.title(conf.NOMBRE_AP) 
         self.master.geometry("800x500")
+        # p1 = PhotoImage(file = conf.DIR_IMA+'logo.png')  
+        # self.master.iconphoto(self, p1)
         self.addTitulo()
         self.addControles()
         self.addMenu()
@@ -30,22 +31,22 @@ class Gui(Frame):
         menu = Menu(self)
        
         file_menu = Menu(menu, tearoff=0)        
-        file_menu.add_command(label="Abrir", command=self.seleccionar_archivo, accelerator='Ctrl+A' )       
+        file_menu.add_command(label=_("Abrir"), command=self.seleccionar_archivo, accelerator='Ctrl+A' )       
         
         menu_interno = Menu(file_menu, tearoff=0)
-        menu_interno.add_command(label="Cifrar", command=self.hilo_cifrar_archivo)
-        menu_interno.add_command(label="Descifrar", command=self.hilo_descifrar_archivo)
+        menu_interno.add_command(label=_("Cifrar"), command=self.hilo_cifrar_archivo)
+        menu_interno.add_command(label=_("Descifrar"), command=self.hilo_descifrar_archivo)
         
-        file_menu.add_cascade(label="Ejecutar", menu=menu_interno)
+        file_menu.add_cascade(label=_("Ejecutar"), menu=menu_interno)
         file_menu.add_separator()
-        file_menu.add_command(label="Salir", command=self.quit)
-        menu.add_cascade(label="Archivo", menu=file_menu)       
+        file_menu.add_command(label=_("Salir"), command=self.quit)
+        menu.add_cascade(label=_("Archivo"), menu=file_menu)       
 
         help_menu = Menu(menu, tearoff=0)
-        help_menu.add_command(label="Acerca de...", 
-                              command=lambda:  tkmb.showinfo(title='Acerca de...', 
-                                                             message=conf.NOMBRE_AP+' '+conf.VERSION,icon='info', detail=conf.DESCRIPCION_APP+'\n\n'+conf.CREDITOS+', 2023\nVillalmanzo, (España)'))
-        menu.add_cascade(label="Ayuda", menu=help_menu)
+        help_menu.add_command(label=_("Acerca de..."), 
+                              command=lambda:  tkmb.showinfo(title=_('Acerca de...'), 
+                                                             message=conf.NOMBRE_AP+' '+conf.VERSION,icon='info', detail=_(conf.DESCRIPCION_APP)+'\n\n'+conf.CREDITOS+', 2023\nVillalmanzo, (España)'))
+        menu.add_cascade(label=_("Ayuda"), menu=help_menu)
         
         #
         # Establece la barra de menú como la barra de menú principal
@@ -55,12 +56,12 @@ class Gui(Frame):
         # Crear el frame que contiene los controles 
         controles_frame = Frame(self,highlightbackground="white", highlightthickness=2)
         controles_frame.pack(fill=BOTH,pady=(10,20)) 
-        titulo = Label( controles_frame, text=conf.DESCRIPCION_APP)
+        titulo = Label( controles_frame, text=_(conf.DESCRIPCION_APP))
         font_style = Font(family="Lucida Grande", size=20)
         titulo.config(font=font_style)
 
         titulo.pack(pady=5)
-        descripcion = Label( controles_frame, text='Selecciona el archivo y la operación a realizar')
+        descripcion = Label( controles_frame, text=_('Selecciona el archivo y la operación a realizar'))
         descripcion.pack(pady=5)
         
     def addControles(self):
@@ -73,8 +74,8 @@ class Gui(Frame):
         # Crear las variables que almacenan el estado de las opciones
         self.option_var = StringVar(value="cifrar")
          # Crear los radiobuttons para cada opción
-        self.option1_radiobutton = Radiobutton(self.options_frame, text="Cifrar", variable=self.option_var, value="cifrar")
-        self.option2_radiobutton = Radiobutton(self.options_frame, text="Descifrar", variable=self.option_var, value="descifrar")
+        self.option1_radiobutton = Radiobutton(self.options_frame, text=_("Cifrar"), variable=self.option_var, value="cifrar")
+        self.option2_radiobutton = Radiobutton(self.options_frame, text=_("Descifrar"), variable=self.option_var, value="descifrar")
         self.option_var.set("cifrar")
         # Posicionar los radiobuttons en la ventana
         self.option1_radiobutton.pack(side="left",pady=10)
@@ -83,8 +84,9 @@ class Gui(Frame):
         
         self.archivo_frame = Frame(self)
         self.archivo_frame.pack(pady=10)
-        boton_seleccionar_archivo = Button(self.archivo_frame, text=_('Selecciona el archivo'), command=self.seleccionar_archivo)
+        boton_seleccionar_archivo = Button(self.archivo_frame, text=_('Selecciona'), command=self.seleccionar_archivo)
         self.label_archivo = Label(self.archivo_frame, text='',highlightbackground="grey", highlightthickness=2)
+       
         boton_seleccionar_archivo.pack(side="left",pady=10)
         self.label_archivo.pack(side="left",pady=10,fill=BOTH,expand=True)
                        
@@ -92,7 +94,7 @@ class Gui(Frame):
         self.progress_bar = Progressbar(self, orient="horizontal", length=300, mode="determinate")        
         self.progress_bar.pack(pady=20, fill="x")
                        
-        self.boton_ejecutar = Button(self, text='Ejecutar', command=self.ejecutar)
+        self.boton_ejecutar = Button(self, text=_('Ejecutar'), command=self.ejecutar)
         self.boton_ejecutar.pack()
      
         # Se añade un campo de texto para mostrar el resultado de la operación
