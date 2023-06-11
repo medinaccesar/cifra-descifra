@@ -7,7 +7,7 @@ class Configuracion:
 
     NOMBRE_AP = 'Cifradescifra'
     DESCRIPCION_APP = 'Cifra y descifra archivos'
-    VERSION = '1.0.0'
+    VERSION = '1.1.0'
     CREDITOS = 'César Medina'
 
     # Clave maestra para un cifrado de doble capa, sustituir la clave maestra y el salt
@@ -18,6 +18,7 @@ class Configuracion:
     DIR_DOCUMENTOS = os.path.expanduser("~")
     DIR_ABS = os.path.dirname(os.path.abspath(__file__))+os.path.sep
     DIR_BD = 'data'+os.path.sep
+    DIR_DB_BACKUP = DIR_BD+os.path.sep+'backup'+os.path.sep
     DIR_IMA = 'rec'+os.path.sep+'ima'+os.path.sep
 
     # Extensión archivo cifrado
