@@ -16,7 +16,9 @@ argumentos opcionales:
   -c ARCHIVO ARCHIVO_CIFRADO, --cifrar ARCHIVO ARCHIVO_CIFRADO  Cifra el archivo                      
   -d ARCHIVO_CIFRADO ARCHIVO_DESCIFRADO, --descifrar ARCHIVO_CIFRADO ARCHIVO_DESCIFRADO Descifra el archivo                     
   -g, --gui             Se ejecuta el entorno gráfico
-  -a, --asesorado       Se ejecuta el modo guiado
+  -a, --asistido        Se ejecuta el modo guiado
+  -b, --copiar          Hace una copia de la base de datos
+  -r ARCHIVO_COPIA, --restaurar ARCHIVO_COPIA      Restaura una copia de la base de datos
   --version             Muestra la versión del programa
 ```
 # Traducciones / Translations
