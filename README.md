@@ -41,7 +41,7 @@ argumentos opcionales:
 ```
 Por ejemplo:
 ```
-python cifradescifra-py -c archivo.pdf archivo.pdf.cifrado
+python cifradescifra.py -c archivo.pdf archivo.pdf.cifrado
 Se ejecuta en modo consola
 Progreso |██████████████████████████████████████████████████| 100% Completo
 El archivo se ha cifrado correctamente.
@@ -99,4 +99,4 @@ IDIOMA = 'en'
 
 1) Intercambio de claves con clave pública y privada para permitir compartir archivos cifrados
 2) Aplicación móvil
-3) Exlorar compartir las claves públicas en una cadena de bloques
+3) Explorar compartir las claves públicas en una cadena de bloques
