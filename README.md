@@ -3,8 +3,22 @@ Permite cifrar y descifrar archivos, puede ejecutarse en modo consola, en modo g
 El cifrado se hace con una clave única, (para cada archivo), que se genera para cada operación de cifrado, estas claves se gestionan internamente y están a su vez cifradas con una clave maestra configurable.
 
 # Requisitos
- Para las variables de entorno «python-dotenv», y si se quiere usar la interfaz gráfica «tkinter».        
+ Si se quiere usar la interfaz gráfica «tkinter».    
+ En linux con apt-get o el gestor de paquetes correspondiente, por ejemplo:
+```
+ sudo apt-get install python3-tk
+ ```
+En «windows» está incluido a partir de python 3.
 
+# Instalación de dependencias
+Se instalan las dependencias establecidas en el setup:
+```
+ pip install .    
+```
+Se compilan los archivos de idiomas:
+```
+python compile_lang.py 
+```
 # Uso
 ```
 Uso: cifradescifra.py [-h] [-c ARCHIVO ARCHIVO_CIFRADO | -d ARCHIVO_CIFRADO ARCHIVO_DESCIFRADO | -g | -a] [--version]
@@ -22,7 +36,7 @@ argumentos opcionales:
   --version             Muestra la versión del programa
 ```
 # Traducciones / Translations
-Se puede usar como base ./locales/programa.po y con «poedit» se rellenan las traducciones y se compila para generar el archivo «programa.mo».  Ambos archivos se colocan dentro de la carpeta correspondiente, por ejemplo para portugués en ./locale/pt/LL_MESSAGES/:
+Se puede usar como base ./locale/programa.po y con «poedit» u otro editor rellenar las traducciones.  El archivo se coloca dentro de la carpeta correspondiente, por ejemplo para portugués en ./locale/pt/LL_MESSAGES/:
 
 ```
 cifra-descifra/
@@ -32,19 +46,21 @@ cifra-descifra/
 ├─ locale/
 │  ├─ pt/    
 │  │   └─ LL_MESSAGES/
-│  │        ├─programa.mo
 │  │        └─programa.po
 │  ├─ ...
 |
 ├─ ...  
+```
+Posteriormente se compila el archivo de traducción ejecutando:
+```
+python compile_lang.py 
 ```
 El idioma de la aplicación se fija en el archivo .env:
 ```
 IDIOMA = 'es'
 ```
-Nota: Las traducciones para inglés necesitan ser compiladas, lo mismo las cadenas de argparse de español (argparse tiene cadenas exclusivamente en inglés, algunas se han traducido en esta aplicación), en el repositorio están los archivos «po», falta generar los «mo» con «poedit».
 
-[EN] You can use as a base ./locale/program.po and with "poedit" you fill in the translations and compile it to generate the "program.mo" file.  Both files are placed inside the corresponding folder, for example for Portuguese in ./locale/pt/LL_MESSAGES/:
+[EN] You can use as a base ./locale/programa.po and with "poedit" or another editor fill in the translations.  The file is placed inside the corresponding folder, for example for Portuguese in ./locale/pt/LL_MESSAGES/:
 ```
 cifra-descifra/
 ├─ README.md
@@ -53,17 +69,19 @@ cifra-descifra/
 ├─ locale/
 │  ├─ pt/    
 │  │   └─ LL_MESSAGES/
-│  │        ├─programa.mo
 │  │        └─programa.po
 │  ├─ ...
 |
 ├─ ...  
 ```
+Subsequently, the translation file is compiled by executing:
+```
+python compile_lang.py 
+```
 The application language is set in the .env file:
 ```
 IDIOMA = 'en'
 ```
-Note: The English translations need to be compiled, the Spanish argparse strings need to be compiled, the po files are in the repository, the mo files need to be generated with "poedit".
 
 # Líneas futuras
 
