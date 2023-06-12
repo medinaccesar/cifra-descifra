@@ -5,6 +5,7 @@ from tkinter.font import Font
 import tkinter.messagebox as tkmb
 from tkinter.ttk import Progressbar
 from tkinter import PhotoImage
+from service.fichero_service import Fichero
 from utils.locale_manager import _
 from service.cifradescifra_service import CifraDescifraArchivo
 from constantes import Configuracion as conf
@@ -16,6 +17,7 @@ class Gui(Frame):
         super().__init__(master)
         
         self._cifra_descifra_archivo = CifraDescifraArchivo()
+        self._fichero = Fichero()
         self._ruta_archivo = ''
         self.master.title(conf.NOMBRE_AP) 
         self.master.geometry("800x500")
@@ -122,7 +124,7 @@ class Gui(Frame):
           
             self.progress_bar["value"] = 10
             nombre_archivo = self._ruta_archivo   
-            marca_temporal = self._cifra_descifra_archivo.marca_temporal()      
+            marca_temporal = self._fichero.marca_temporal()      
             nombre_archivo_cifrado = nombre_archivo+'_'+marca_temporal+conf.EXT_ARCHIVO_CIFRADO
             self._cifra_descifra_archivo.cifrar_archivo(nombre_archivo, nombre_archivo_cifrado, self.barra_progreso_callback)
             self.resultado['text'] = _('El archivo se ha cifrado correctamente.')
@@ -134,8 +136,8 @@ class Gui(Frame):
         else: 
             self.progress_bar["value"] = 10            
             nombre_archivo_cifrado = self._ruta_archivo             
-            nombre_archivo_descifrado = self._cifra_descifra_archivo.obtener_nombre_original(nombre_archivo_cifrado)
-            nombre_archivo_descifrado = self._cifra_descifra_archivo.annadir_marca_temporal(nombre_archivo_descifrado)
+            nombre_archivo_descifrado = self._fichero.obtener_nombre_original(nombre_archivo_cifrado)
+            nombre_archivo_descifrado = self._fichero.annadir_marca_temporal(nombre_archivo_descifrado)
             self._cifra_descifra_archivo.descifrar_archivo(nombre_archivo_cifrado, nombre_archivo_descifrado, self.barra_progreso_callback)
             self.resultado['text'] = _('El archivo se ha descifrado correctamente.')          
             

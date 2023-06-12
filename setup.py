@@ -6,8 +6,10 @@ setup(
     version = conf.VERSION,
     packages = [''],
     install_requires=[
-        'python-dotenv',
-        'tkinter'             
+        'python-dotenv', 
+        'python-gettext'                
+        # 'pandas',
+        # 'SQLAlchemy'             
     ],
     classifiers=[
         'Programming Language :: Python :: 3',
