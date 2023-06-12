@@ -41,7 +41,7 @@ Por ejemplo:
 ```
 python cifradescifra-py -c archivo.pdf archivo.pdf.cifrado
 Se ejecuta en modo consola
-Progreso |████████████████████████████████████████████████████████████████████████████████████████████████████| 100% Completo
+Progreso |██████████████████████████████████████████████████| 100% Completo
 El archivo se ha cifrado correctamente.
 ```
 
