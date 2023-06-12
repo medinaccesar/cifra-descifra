@@ -1,6 +1,8 @@
 # cifra-descifra
-Permite cifrar y descifrar archivos, puede ejecutarse en modo consola, en modo guiado o en modo gráfico. Por defecto en español pero admite otros idiomas.
-El cifrado se hace con una clave única, (para cada archivo), que se genera para cada operación de cifrado, estas claves se gestionan internamente y están a su vez cifradas con una clave maestra configurable.
+Permite cifrar y descifrar archivos, puede ejecutarse en modo consola, en modo guiado o en modo gráfico. Por defecto está en español pero admite otros idiomas.
+El cifrado se hace con una clave única que se genera para cada operación de cifrado, estas claves se gestionan internamente y están, a su vez, cifradas con una clave maestra configurable.
+
+Para el proceso anterior se usa «Fernet» que utiliza AES con una clave de 128 bits para el cifrado y SHA256 para la función de autenticación (HMAC). Por otra parte se utiliza SHA256 para cifrar las claves únicas que se generan en cada operación de cifrado.
 
 # Requisitos
  Python 3.
