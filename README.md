@@ -3,8 +3,10 @@ Permite cifrar y descifrar archivos, puede ejecutarse en modo consola, en modo g
 El cifrado se hace con una clave única, (para cada archivo), que se genera para cada operación de cifrado, estas claves se gestionan internamente y están a su vez cifradas con una clave maestra configurable.
 
 # Requisitos
- Si se quiere usar la interfaz gráfica «tkinter».    
- En linux con apt-get o el gestor de paquetes correspondiente, por ejemplo:
+ Python 3.
+ 
+ Si se quiere usar la interfaz gráfica se requiere «tkinter».    
+ En linux se puede instalar con apt-get o el gestor de paquetes correspondiente, por ejemplo:
 ```
  sudo apt-get install python3-tk
  ```
@@ -21,9 +23,9 @@ python compile_lang.py
 ```
 # Uso
 ```
-Uso: cifradescifra.py [-h] [-c ARCHIVO ARCHIVO_CIFRADO | -d ARCHIVO_CIFRADO ARCHIVO_DESCIFRADO | -g | -a] [--version]
+Uso: python cifradescifra.py [-h] [-c ARCHIVO ARCHIVO_CIFRADO | -d ARCHIVO_CIFRADO ARCHIVO_DESCIFRADO | -g | -a] [--version]
 
-Cifradescifra 1.0.0
+Cifradescifra 1.1.1
 
 argumentos opcionales:
   -h, --help            muestra este mensaje de ayuda y sale
@@ -35,6 +37,14 @@ argumentos opcionales:
   -r ARCHIVO_COPIA, --restaurar ARCHIVO_COPIA      Restaura una copia de la base de datos
   --version             Muestra la versión del programa
 ```
+Por ejemplo:
+```
+python cifradescifra-py -c archivo.pdf archivo.pdf.cifrado
+Se ejecuta en modo consola
+Progreso |████████████████████████████████████████████████████████████████████████████████████████████████████| 100% Completo
+El archivo se ha cifrado correctamente.
+```
+
 # Traducciones / Translations
 Se puede usar como base ./locale/programa.po y con «poedit» u otro editor rellenar las traducciones.  El archivo se coloca dentro de la carpeta correspondiente, por ejemplo para portugués en ./locale/pt/LL_MESSAGES/:
 
@@ -85,6 +95,6 @@ IDIOMA = 'en'
 
 # Líneas futuras
 
-1) Intercambio de claves para permitir compartir archivos 
-2) Listado de los archivos cifrados 
-3) Aplicación móvil
+1) Intercambio de claves con clave pública y privada para permitir compartir archivos cifrados
+2) Aplicación móvil
+3) Exlorar compartir las claves públicas en una cadena de bloques
