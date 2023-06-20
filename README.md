@@ -2,7 +2,7 @@
 Permite cifrar y descifrar archivos, puede ejecutarse en modo consola, en modo guiado o en modo gráfico. Por defecto está en español pero admite otros idiomas.
 El cifrado se hace con una clave única que se genera para cada operación de cifrado, estas claves se gestionan internamente y están, a su vez, cifradas con una clave maestra configurable.
 
-Para el proceso anterior se usa «Fernet» que utiliza AES con una clave de 128 bits para el cifrado y SHA256 para la función de autenticación (HMAC). Por otra parte se utiliza SHA256 para cifrar las claves únicas que se generan en cada operación de cifrado.
+Para el proceso anterior se usa «Fernet» que utiliza AES con una clave de 128 bits para el cifrado y SHA256 para la función de autenticación (HMAC). Por otra parte se utiliza una función hash SHA256 para, a partir de la clave maestra, derivar la clave con la que, a su vez, cifrar las claves únicas que se generan en cada operación de cifrado.
 
 # Requisitos
  Python 3.
@@ -98,5 +98,6 @@ IDIOMA = 'en'
 # Líneas futuras
 
 1) Intercambio de claves con clave pública y privada para permitir compartir archivos cifrados
-2) Aplicación móvil
-3) Explorar compartir las claves públicas en una cadena de bloques
+2) Más algoritmos de cifrado
+3) Aplicación móvil
+4) Explorar compartir las claves públicas en una cadena de bloques
