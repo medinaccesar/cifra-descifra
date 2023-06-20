@@ -7,7 +7,7 @@ class Configuracion:
 
     NOMBRE_AP = 'Cifradescifra'
     DESCRIPCION_APP = 'Cifra y descifra archivos'
-    VERSION = '1.2.2'
+    VERSION = '1.2.3'
     CREDITOS = 'César Medina'
 
     # Clave maestra para un cifrado de doble capa, sustituir la clave maestra y el salt
