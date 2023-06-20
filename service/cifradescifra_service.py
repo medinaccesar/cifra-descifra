@@ -85,4 +85,4 @@ class CifraDescifraArchivo():
         contenido_descifrado = fernet.decrypt(contenido_cifrado)
         if callback: callback(20)        
         self._fichero.escribir_archivo(nombre_archivo_descifrado, contenido_descifrado)
-        if callback: callback(10)
+        if callback: callback(5)

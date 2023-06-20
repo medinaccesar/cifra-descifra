@@ -7,7 +7,8 @@ setup(
     packages = [''],
     install_requires=[
         'python-dotenv', 
-        'python-gettext'                
+        'python-gettext',
+        'cryptography'
         # 'pandas',
         # 'SQLAlchemy'             
     ],
