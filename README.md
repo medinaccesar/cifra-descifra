@@ -41,10 +41,21 @@ argumentos opcionales:
 ```
 Por ejemplo:
 ```
+## Cifrar un archivo en modo consola
 python cifradescifra.py -c archivo.pdf archivo.pdf.cifrado
 Se ejecuta en modo consola
 Progreso |████████████████████████████████████████| 100% Completo
 El archivo se ha cifrado correctamente.
+
+## Descifrar un archivo en modo consola
+python cifradescifra.py -d archivo.pdf.cifrado archivo.pdf
+Se ejecuta en modo consola
+Progreso |████████████████████████████████████████| 100% Completo
+El archivo se ha descifrado correctamente.
+
+## Cifrar o descifrar un archivo en modo gáfico 
+python cifradescifra.py -g
+
 ```
 
 # Traducciones / Translations
@@ -99,5 +110,7 @@ IDIOMA = 'en'
 
 1) Intercambio de claves con clave pública y privada para permitir compartir archivos cifrados
 2) Más algoritmos de cifrado
-3) Aplicación móvil
-4) Explorar compartir las claves públicas en una cadena de bloques
+3) Cifrar carpetas enteras
+4) Aplicación móvil
+5) Explorar compartir las claves públicas en una cadena de bloques
+
