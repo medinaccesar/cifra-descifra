@@ -55,36 +55,43 @@ argumentos opcionales:
   --version             Muestra la versión del programa
 ```
 Por ejemplo:
+
+* **Cifrar un archivo en modo consola:**
 ```
-## Cifrar un archivo en modo consola
 python cifradescifra.py -c archivo.pdf archivo.pdf.cifrado
 Se ejecuta en modo consola
 Progreso |████████████████████████████████████████| 100% Completo
 El archivo se ha cifrado correctamente.
-
-## Descifrar un archivo en modo consola
+```
+* **Descifrar un archivo en modo consola:**
+``` 
 python cifradescifra.py -d archivo.pdf.cifrado archivo.pdf
 Se ejecuta en modo consola
 Progreso |████████████████████████████████████████| 100% Completo
 El archivo se ha descifrado correctamente.
-
-## Cifrar o descifrar un archivo en modo gráfico 
+``` 
+* **Cifrar o descifrar un archivo en modo gráfico:** 
+``` 
 python cifradescifra.py -g
-
-## Cifrar o descifrar un archivo en modo asistido 
+``` 
+* **Cifrar o descifrar un archivo en modo asistido:** 
+``` 
 python cifradescifra.py -a
-
-## Hacer una copia de seguridad de la base con las claves cifradas 
+``` 
+* **Hacer una copia de seguridad de la base con las claves cifradas:**
+``` 
 python cifradescifra.py -b
+```
+    Se recomienda de vez en cuando por seguridad para no perder las claves, sin ellas es  imposible descifrar los archivos, o simplemente para importarlas en otro equipo. El archivo se genera en la carpeta ./data/backup/ con el nombre segudo de la fecha y hora en que se generó.
 
-Se recomienda de vez en cuando por seguridad para no perder las claves, sin ellas es  imposible descifrar los archivos, o simplemente para importarlas en otro equipo. El archivo se genera en la carpeta ./data/backup/ con el nombre segudo de la fecha y hora en que se generó.
-
-## Importar una copia de seguridad de la base con las claves cifradas 
+* **Importar una copia de seguridad de la base con las claves cifradas:**
+``` 
 python cifradescifra.py -r database_230723_125148.db
+```
+    La importación sustituirá la base de datos actual si la hubiera. Otra forma de restaurarlo es copiando el archivo en la carpera ./data y renombrarlo como database.db
 
-La importación sustituirá la base de datos actual si la hubiera. Otra forma de restaurarlo es copiando el archivo en la carpera ./data y renombrarlo como database.db
-
-## Establecer una contraseña  para entrar en la aplicación
+* **Establecer una contraseña  para entrar en la aplicación:**
+``` 
 python cifradescifra.py -C
 Se ejecuta en modo consola. 
 
@@ -93,25 +100,26 @@ Se establecerá una contraseña de inicio
 Intoduzca la contraseña: ****
 Repita la contraseña: ****
 La contraseña se ha establecido correctamente.
-
-## Desestablecer la contraseña de inicio
+``` 
+* **Desestablecer la contraseña de inicio:**
+``` 
 Intoduzca la contraseña: ****
 Se ejecuta en modo consola. 
-
 
 Se desestablecerá la contraseña de inicio 
 
 Para desestablecerla intoduzca antes la contraseña: ****
 La contraseña se ha desestablecido correctamente. 
-
-## Establecer el tipo de cifrado por defecto
+``` 
+* **Establecer el tipo de cifrado por defecto:**
+``` 
 python cifradescifra.py -t
 Se ejecuta en modo consola. 
 
-
 ¿Elija el tipo de cifrado? (AES128_CBC/AES256_GCM/XChaCha20_Poly1305) o (c/g/x): g
-
-## Información sobre las opciones establecidas
+``` 
+* **Información sobre las opciones establecidas:**
+``` 
 python cifradescifra.py -i
 Se ejecuta en modo consola. 
 
