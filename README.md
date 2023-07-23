@@ -82,13 +82,18 @@ python cifradescifra.py -a
 ``` 
 python cifradescifra.py -b
 ```
-    Se recomienda de vez en cuando por seguridad para no perder las claves, sin ellas es  imposible descifrar los archivos, o simplemente para importarlas en otro equipo. El archivo se genera en la carpeta ./data/backup/ con el nombre segudo de la fecha y hora en que se generó.
+    Se recomienda de vez en cuando por seguridad para no perder las claves, 
+    sin ellas es  imposible descifrar los archivos, o simplemente para importarlas 
+    en otro equipo. El archivo se genera en la carpeta ./data/backup/ con el nombre 
+    seguido de la fecha y hora en que se generó.
 
 * **Importar una copia de seguridad de la base con las claves cifradas:**
 ``` 
 python cifradescifra.py -r database_230723_125148.db
 ```
-    La importación sustituirá la base de datos actual si la hubiera. Otra forma de restaurarlo es copiando el archivo en la carpera ./data y renombrarlo como database.db
+    La importación sustituirá la base de datos actual si la hubiera. 
+    Otra forma de restaurarlo es copiando el archivo en la carpera ./data 
+    y renombrarlo como database.db
 
 * **Establecer una contraseña  para entrar en la aplicación:**
 ``` 
