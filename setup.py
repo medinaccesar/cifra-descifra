@@ -6,9 +6,10 @@ setup(
     version = conf.VERSION,
     packages = [''],
     install_requires=[
-        'python-dotenv', 
+        'python-dotenv',
         'python-gettext',
-        'cryptography'
+        'cryptography',                
+        'chacha20poly1305'
         # 'pandas',
         # 'SQLAlchemy'             
     ],

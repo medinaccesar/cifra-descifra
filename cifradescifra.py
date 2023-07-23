@@ -1,20 +1,22 @@
-
-from utils.barra_progreso import BarraProgresoConsola
 from utils.espannol_string_argparse import *
 import argparse
-from utils.locale_manager import _
+from utils.locale_manager import _,p
 from gui.gui import Gui
-from service.cifradescifra_service import CifraDescifraArchivo
-from conexion_bd.conexion_bd_sqlite import ConexionBdSqlite
-from service.fichero_service import Fichero
 from constantes import Configuracion as conf
-
+from service.cifrado_doble_service import CifradoDobleCapa
+from service.tipos_cifrado.cifrado_AES128_CBC_service import CifraDescifraArchivoAES128CBC
+from service.tipos_cifrado.cifrado_AES256_GCM_service import CifraDescifraArchivoAES256GCM
+from service.tipos_cifrado.cifrado_XChaCha20_Poly1305_service import CifraDescifraArchivoXChachaPoly
+from service.fichero_service import Fichero
+from conexion_bd.conexion_bd_sqlite import ConexionBdSqlite
+from utils.barra_progreso import BarraProgresoConsola
 
 class CifraDescifra():
 
     def __init__(self):
         
-        self._cifra_descifra_archivo = CifraDescifraArchivo()
+        self._cifra_descifra_archivo = None
+        self._cifrado_doble_capa = CifradoDobleCapa()
         self._fichero = Fichero()
         self._comprobar_bd()
         parser = self._get_parser()
@@ -30,6 +32,7 @@ class CifraDescifra():
     def _ejecutar_gui(self):
         
         gui = Gui()
+        gui.set_cifra_descifra_archivo(self._cifra_descifra_archivo)
         gui.mainloop()
 
     # Se ejecuta en modo consola
@@ -72,11 +75,12 @@ class CifraDescifra():
             
     # Se ejecuta en modo de consola guiado
     def _ejecutar_modo_guiado(self):
-
+        
         accion = input(
             _('¿Desea cifrar o descifrar un archivo? (cifrar/descifrar) o (c/d): '))
 
         if accion == 'cifrar' or accion == 'c':
+          
             nombre_archivo = input(
                 _('Introduzca el nombre del archivo a cifrar: '))
             nombre_archivo_cifrado = input(
@@ -97,6 +101,27 @@ class CifraDescifra():
             print(_('El archivo se ha descifrado correctamente.'))
         else:
             print(_('La acción introducida no es válida'))
+
+    def _preguntar_tipo_cifrado(self):
+        tipo_cifrado = input(
+            _('¿Elija el tipo de cifrado? (AES128_CBC/AES256_GCM/XChaCha20_Poly1305) o (c/g/x): '))
+        
+        if tipo_cifrado == conf.CIFRADO_AES128_CBC or tipo_cifrado == 'c':
+            self._cifra_descifra_archivo = CifraDescifraArchivoAES128CBC()
+        elif tipo_cifrado == conf.CIFRADO_AES256_GCM or tipo_cifrado == 'g': 
+            self._cifra_descifra_archivo = CifraDescifraArchivoAES256GCM() 
+        else:
+            self._cifra_descifra_archivo = CifraDescifraArchivoXChachaPoly()       
+    
+    def _preguntar_contrasenna(self):
+        conexion_bd = ConexionBdSqlite()
+        requiere_clave, clave_aplicacion = conexion_bd.obtener_requiere_clave_aplicacion()
+        if requiere_clave:
+            contrasenna = input( _('Intoduzca la contraseña'))
+            contrasenna_cifrada = self._cifrado_doble_capa.cifrar_clave(contrasenna)
+            if not clave_aplicacion == contrasenna_cifrada:            
+                p('La contraseña es incorrecta')
+                exit()     
 
     def _get_parser(self):
         
@@ -122,6 +147,8 @@ class CifraDescifra():
         return parser
 
     def _procesar_argumentos(self, parser):
+        self._preguntar_contrasenna()
+        self._preguntar_tipo_cifrado()
         args = parser.parse_args()
         if args.gui:
             self._ejecutar_gui()
