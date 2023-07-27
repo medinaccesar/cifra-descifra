@@ -1,8 +1,8 @@
-# cifra-descifra
+# cifra-descifra v2.0.0 
 Permite cifrar y descifrar archivos, puede ejecutarse en modo consola, en modo guiado o en modo gráfico. Por defecto está en español pero admite otros idiomas.
 El cifrado se hace con una clave única que se genera para cada operación de cifrado, estas claves se gestionan internamente y están, a su vez, cifradas con una clave derivada de una clave maestra configurable.
 
-Novedades de la versión 2  <font color="red">(No estable, en proceso...)</font>:
+Novedades de la versión 2 | $\textcolor{red}{\textsf{(No estable, en proceso...)}}$:
 
 1) Permite elegir el tipo de cifrado:
     1) AES128_CBC
