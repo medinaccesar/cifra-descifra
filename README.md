@@ -40,18 +40,31 @@ python compile_lang.py
 ```
 # Uso
 ```
-Uso: python cifradescifra.py [-h] [-c ARCHIVO ARCHIVO_CIFRADO | -d ARCHIVO_CIFRADO ARCHIVO_DESCIFRADO | -g | -a] [--version]
+Uso: cifradescifra.py [-h]
+                      [-c ARCHIVO ARCHIVO_CIFRADO | -d ARCHIVO_CIFRADO ARCHIVO_DESCIFRADO | -g | -a
+                      | -b | -r ARCHIVO_COPIA | -C | -Q | -t | -E NOMBRE_ARCHVO | -cc ARCHIVO [CORREO_1, CORREO_2 ...]
+                      | -ic ARCHIVO_CLAVE | -l | -i] [--version]
 
-Cifradescifra 1.1.1
+Cifradescifra 2.0.0
 
 argumentos opcionales:
   -h, --help            muestra este mensaje de ayuda y sale
-  -c ARCHIVO ARCHIVO_CIFRADO, --cifrar ARCHIVO ARCHIVO_CIFRADO  Cifra el archivo                      
-  -d ARCHIVO_CIFRADO ARCHIVO_DESCIFRADO, --descifrar ARCHIVO_CIFRADO ARCHIVO_DESCIFRADO Descifra el archivo                     
+  -c ARCHIVO ARCHIVO_CIFRADO, --cifrar ARCHIVO ARCHIVO_CIFRADO
+                        Cifrar archivo
+  -d ARCHIVO_CIFRADO ARCHIVO_DESCIFRADO, --descifrar ARCHIVO_CIFRADO ARCHIVO_DESCIFRADO  Descifrar archivo
   -g, --gui             Se ejecuta el entorno gráfico
   -a, --asistido        Se ejecuta el modo guiado
   -b, --copiar          Hace una copia de la base de datos
-  -r ARCHIVO_COPIA, --restaurar ARCHIVO_COPIA      Restaura una copia de la base de datos
+  -r ARCHIVO_COPIA, --restaurar ARCHIVO_COPIA
+                        Restaura una copia de la base de datos
+  -C, --clave           Establece una contraseña para ejecutar el programa
+  -Q, --quitar-clave    Desestablece la contraseña
+  -t, --tipo-cifrado    Selecciona el tipo de cifrado por defecto
+  -E NOMBRE_ARCHIVO, --exportar-clave NOMBRE_ARCHIVO          Exporta tu clave pública
+  -cc ARCHIVO [CORREO_1, CORREO_2 ...], --compartir ARCHIVO [CORREO_1, CORREO_2 ...]  Cifrar archivo para compartirlo
+  -ic ARCHIVO_CLAVE, --importar-clave ARCHIVO_CLAVE           Importa una clave pública de otro usuario
+  -l, --listar-claves   Lista los correos de las claves públicas
+  -i, --info            Muesta las opciones establecidas
   --version             Muestra la versión del programa
 ```
 Por ejemplo:
