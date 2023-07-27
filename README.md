@@ -1,8 +1,8 @@
-# cifra-descifra v2.0.0 
+# cifra-descifra v2.0.0 | $\textcolor{red}{\textsf{(No estable, en proceso...)}}$
 Permite cifrar y descifrar archivos, puede ejecutarse en modo consola, en modo guiado o en modo gráfico. Por defecto está en español pero admite otros idiomas.
 El cifrado se hace con una clave única que se genera para cada operación de cifrado, estas claves se gestionan internamente y están, a su vez, cifradas con una clave derivada de una clave maestra configurable.
 
-Novedades de la versión 2 | $\textcolor{red}{\textsf{(No estable, en proceso...)}}$:
+Novedades de la versión 2:
 
 1) Permite elegir el tipo de cifrado:
     1) AES128_CBC
@@ -41,8 +41,9 @@ python compile_lang.py
 # Uso
 ```
 Uso: cifradescifra.py [-h]
-                      [-c ARCHIVO ARCHIVO_CIFRADO | -d ARCHIVO_CIFRADO ARCHIVO_DESCIFRADO | -g | -a
-                      | -b | -r ARCHIVO_COPIA | -C | -Q | -t | -E NOMBRE_ARCHVO | -cc ARCHIVO [CORREO_1, CORREO_2 ...]
+                      [-c ARCHIVO ARCHIVO_CIFRADO | -d ARCHIVO_CIFRADO ARCHIVO_DESCIFRADO | -g
+                      | -a | -b | -r ARCHIVO_COPIA | -C | -Q | -t | -E NOMBRE_ARCHVO
+                      | -cc ARCHIVO [CORREO_1, CORREO_2 ...]
                       | -ic ARCHIVO_CLAVE | -l | -i] [--version]
 
 Cifradescifra 2.0.0
