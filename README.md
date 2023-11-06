@@ -1,4 +1,5 @@
-# cifra-descifra v2.0.0 | $\textcolor{red}{\textsf{(No estable, en proceso...)}}$
+![Static Badge](https://img.shields.io/badge/status-En%20desarrollo-brightgreen)
+# cifra-descifra v2.0.0 
 Permite cifrar y descifrar archivos, puede ejecutarse en modo consola, en modo guiado o en modo gráfico. Por defecto está en español pero admite otros idiomas.
 El cifrado se hace con una clave única que se genera para cada operación de cifrado, estas claves se gestionan internamente y están, a su vez, cifradas con una clave derivada de una clave maestra configurable.
 
