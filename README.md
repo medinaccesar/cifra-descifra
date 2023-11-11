@@ -1,8 +1,12 @@
-# cifra-descifra
+# cifra-descifra v1.2.3
 Permite cifrar y descifrar archivos, puede ejecutarse en modo consola, en modo guiado o en modo gráfico. Por defecto está en español pero admite otros idiomas.
 El cifrado se hace con una clave única que se genera para cada operación de cifrado, estas claves se gestionan internamente y están, a su vez, cifradas con una clave maestra configurable.
 
 Para el proceso anterior se usa «Fernet» que utiliza AES con una clave de 128 bits para el cifrado y SHA256 para la función de autenticación (HMAC). Por otra parte se utiliza una función hash SHA256 para, a partir de la clave maestra, derivar la clave con la que, a su vez, cifrar las claves únicas que se generan en cada operación de cifrado.
+
+
+
+Nota*: versión ![2.0.0](https://github.com/medinaccesar/cifra-descifra/tree/v2.0.0) ![Static Badge](https://img.shields.io/badge/status-En%20desarrollo-brightgreen)
 
 # Requisitos
  Python 3.
