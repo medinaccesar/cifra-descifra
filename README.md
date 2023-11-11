@@ -31,7 +31,7 @@ python compile_lang.py
 ```
 Uso: python cifradescifra.py [-h] [-c ARCHIVO ARCHIVO_CIFRADO | -d ARCHIVO_CIFRADO ARCHIVO_DESCIFRADO | -g | -a] [--version]
 
-Cifradescifra 1.1.1
+Cifradescifra 1.2.3
 
 argumentos opcionales:
   -h, --help            muestra este mensaje de ayuda y sale
