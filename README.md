@@ -195,7 +195,7 @@ python compile_lang.py
 ```
 The application language is set in the .env file:
 ```
-IDIOMA = 'en'
+IDIOMA = 'pt'
 ```
 
 # Líneas futuras
