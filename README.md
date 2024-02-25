@@ -6,7 +6,7 @@ Para el proceso anterior se usa «Fernet» que utiliza AES con una clave de 128 
 
 
 
-Nota*: versión ![2.0.0](https://github.com/medinaccesar/cifra-descifra/tree/v2.0.0) ![Static Badge](https://img.shields.io/badge/status-En%20desarrollo-brightgreen)
+Nota*: próximamente una nueva versión ![2.0.0](https://github.com/medinaccesar/cifra-descifra/tree/v2.0.0) ![Static Badge](https://img.shields.io/badge/status-En%20desarrollo-brightgreen)
 
 # Requisitos
  Python 3.
@@ -113,7 +113,7 @@ python compile_lang.py
 ```
 The application language is set in the .env file:
 ```
-IDIOMA = 'en'
+IDIOMA = 'pt'
 ```
 
 # Líneas futuras
