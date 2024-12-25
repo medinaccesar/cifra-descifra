@@ -31,9 +31,9 @@ Novedades de la versión 2:
 En «windows» está incluido a partir de python 3.
 
 # Instalación de dependencias
-Se instalan las dependencias establecidas en el setup:
+Se instalan las dependencias :
 ```
- pip install .    
+pip install -r requirements.txt 
 ```
 Se compilan los archivos de idiomas:
 ```
