@@ -17,6 +17,8 @@ class CifraDescifraArchivoAES256GCM(CifraDescifraArchivo):
     def cifrar_archivo(self, ruta_archivo, ruta_archivo_cifrado, callback = None):
         conexion_bd = ConexionBdSqlite()
         contenido = self._fichero.leer_archivo(ruta_archivo)
+        if contenido is None:
+            return False
         if callback:callback(20) # Avance de la barra de progreso en el entorno gráfico
         # Se genera una clave secreta y un vector de inicialización
         clave = os.urandom(32)       
@@ -37,10 +39,12 @@ class CifraDescifraArchivoAES256GCM(CifraDescifraArchivo):
         hash_archivo = self._hash_service.calcular_hash_archivo(ruta_archivo_cifrado)       
         conexion_bd.insertar_registro(hash_archivo, clave_cifrada, iv_cifrado, self._tipocifrado)
         if callback: callback(5)
-
+        return True
     def descifrar_archivo(self, ruta_archivo_cifrado, nombre_archivo_descifrado, callback = None):
         conexion_bd = ConexionBdSqlite()
         contenido_cifrado = self._fichero.leer_archivo(ruta_archivo_cifrado)
+        if contenido_cifrado is None:
+            return False
         if callback:callback(20) # Avance de la barra de progreso en el entorno gráfico 
         hash_archivo = self._hash_service.calcular_hash_archivo(ruta_archivo_cifrado)        
         clave_cifrada, adicional_cifrado = conexion_bd.obtener_clave_cifrada_adicional_cifrado(hash_archivo)
@@ -59,4 +63,5 @@ class CifraDescifraArchivoAES256GCM(CifraDescifraArchivo):
         contenido_descifrado = unpadder.update(decrypted_data) + unpadder.finalize()
         if callback: callback(20)        
         self._fichero.escribir_archivo(nombre_archivo_descifrado, contenido_descifrado)
-        if callback: callback(10)
+        if callback: callback(5)
+        return True

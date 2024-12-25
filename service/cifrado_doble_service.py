@@ -15,16 +15,18 @@ class CifradoDobleCapa():
     def __init__(self):
               
         salt = conf.SALT
-        kdf = self._get_kdf(salt)       
-        self._clave_maestra =  base64.urlsafe_b64encode(kdf.derive(conf.CLAVE_MAESTRA))  
+        kdf = self._get_kdf(salt)     
+        clave_derivada = kdf.derive(conf.CLAVE_MAESTRA)  
+        self._clave_maestra =  base64.urlsafe_b64encode(clave_derivada)          
       
-    def cifrar_clave(self,clave):
-        clave_sucia = self._generar_paja(clave)
-        return self._cifrar_doble(clave_sucia)
+    def cifrar_clave(self,clave):        
+        clave_cifrada = self._cifrar_doble(clave) 
+        return self._generar_paja(clave_cifrada)
     
     def descifrar_clave(self,clave_cifrada):        
-        clave_sucia = self._descifrar_doble(clave_cifrada)
-        return self._limpiar_paja(clave_sucia)    
+        clave_limpia = self._limpiar_paja(clave_cifrada)
+        return self._descifrar_doble(clave_limpia)  
+      
     def _cifrar_doble(self,clave): 
         clave_cifrada_capa_uno = self._cifrar_clave_AES256_GCM(clave)       
         return self._cifrar_clave_AES128_CBC(clave_cifrada_capa_uno)       
@@ -49,7 +51,7 @@ class CifradoDobleCapa():
                 
         kdf = self._get_kdf(salt)
         key = kdf.derive(conf.CLAVE_MAESTRA)
-
+       
         cipher = Cipher(algorithms.AES(key), modes.GCM(iv), backend=default_backend())
         encryptor = cipher.encryptor()
 
@@ -82,15 +84,13 @@ class CifradoDobleCapa():
     
     def _generar_paja(self,clave):
         # TODO: complicarlo
-        num = random.randint(1, 9)
-        prefijo =  bytes([num])
-        #sufijo = bytearray(random.randint(1, 9) for _ in range(random.randint(1, num)))  
+        num = random.randint(1, 9)       
         sufijo = ''.join(random.choices(string.ascii_letters + string.digits, k=num))
         clave_sucia = str(num) + clave + sufijo
         return clave_sucia
     
     def _limpiar_paja(self,clave):        
-        #num = int.from_bytes(clave, byteorder='big')
+        
         num = int(clave[0])
         return clave[1:-num]
     

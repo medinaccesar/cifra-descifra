@@ -1,12 +1,16 @@
 import shutil
 import os
 import re
+import zipfile
+from dotenv import dotenv_values
 from constantes import Configuracion as conf
 from datetime import datetime
 
 class Fichero():
     
     def leer_archivo(self, ruta_archivo):
+        if not self.existe(ruta_archivo):
+            return None
         with open(ruta_archivo, 'rb') as archivo:
             contenido = archivo.read()
         return contenido
@@ -44,16 +48,68 @@ class Fichero():
         nombre_archivo = nombre_archivo[:-
                                         len(extension)] +'_'+ marca_temporal + extension
         return nombre_archivo
-    
-
+  
     def crear_copia_de_seguridad(self):
        
         if not os.path.exists(conf.DIR_DB_BACKUP):
             os.makedirs(conf.DIR_DB_BACKUP)        
-        nombre_bd_copia = self.annadir_marca_temporal('database.db')
-        shutil.copy2(conf.DIR_BD+'database.db',conf.DIR_DB_BACKUP+nombre_bd_copia)
+        nombre_bd_copia = self.annadir_marca_temporal(conf.NOMBRE_BD)
+        shutil.copy2(conf.DIR_BD+conf.NOMBRE_BD,conf.DIR_DB_BACKUP+nombre_bd_copia)
    
     def restaurar_copia_de_seguridad(self,ruta_bd_copia): 
         
         nombre_bd_copia = self.quitar_marca_temporal(ruta_bd_copia)
-        shutil.copy2(nombre_bd_copia, conf.DIR_BD+'database.db')
+        shutil.copy2(nombre_bd_copia, conf.DIR_BD+conf.NOMBRE_BD)
+        
+    def establecer_tipo_cifrado_defecto(self, tipo_cifrado = conf.TIPO_CIFRADO_DEFECTO, ruta_env = conf.DIR_ABS+'.env'):
+        if not self.existe_archivo_env():
+           self.crear_archivo_env()
+        env_vars = dotenv_values(ruta_env)
+        env_vars['TIPO_CIFRADO'] = tipo_cifrado
+        self._escribir_fichero_diccionario(ruta_env,env_vars)
+   
+    def existe_archivo_env(self):
+        ruta_env = conf.DIR_ABS+'.env'               
+        return self.existe(ruta_env)
+    
+    def existe(self,ruta):       
+        if not os.path.isfile(ruta):
+            return False       
+        return True
+    
+    def crear_archivo_env(self):        
+        ruta_env = conf.DIR_ABS+'.env'
+        env_vars = {}
+        env_vars['IDIOMA'] = 'es'        
+        env_vars['TIPO_CIFRADO'] = conf.TIPO_CIFRADO_DEFECTO           
+        self._escribir_fichero_diccionario(ruta_env,env_vars)
+   
+    # Comprime una lista de archivos    [uno, dos...]
+    def comprimir(nombre_zip, archivos):
+        with zipfile.ZipFile(nombre_zip, 'w') as zip_file:
+            for archivo in archivos:
+                zip_file.write(archivo)
+    # descomprime o desempaqueta
+    def descomprimir(nombre_zip):
+        with zipfile.ZipFile(nombre_zip, 'r') as zip_file:
+            zip_file.extractall()   
+             
+    def empaquetar(archivos, nombre_paquete):
+        # Crear una carpeta temporal para almacenar los archivos
+        carpeta_temporal = 'temp'
+        os.makedirs(carpeta_temporal, exist_ok=True)
+
+        # Copiar los archivos a la carpeta temporal
+        for archivo in archivos:
+            shutil.copy(archivo, carpeta_temporal)
+
+        # Comprimir la carpeta temporal en un archivo .paq
+        shutil.make_archive(nombre_paquete, 'zip', carpeta_temporal)
+
+        # Eliminar la carpeta temporal
+        shutil.rmtree(carpeta_temporal)
+    
+    def _escribir_fichero_diccionario(self,ruta,diccionario):
+         with open(ruta, 'w') as archivo:
+            for clave, valor in diccionario.items():
+                archivo.write(f"{clave}={valor}\n")

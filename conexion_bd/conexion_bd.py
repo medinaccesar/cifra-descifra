@@ -6,8 +6,8 @@ class ConexionBd(metaclass=abc.ABCMeta):
     
     def __init__(self):
         load_dotenv() 
-        self.usuario = os.getenv('USUARIO_BD')
-        self.contrasenna = os.getenv('CONTRASENNA_BD')
+        self.usuario = os.getenv('USUARIO_BD',None)
+        self.contrasenna = os.getenv('CONTRASENNA_BD',None)
     
     @abc.abstractmethod
     def connect(self):
