@@ -2,21 +2,41 @@ import shutil
 import os
 import re
 import zipfile
+import json
 from dotenv import dotenv_values
 from constantes import Configuracion as conf
 from datetime import datetime
 
 class Fichero():
     
-    def leer_archivo(self, ruta_archivo):
+    def leer_archivo(self, ruta_archivo):        
+        return self._leer_archivo_generico(ruta_archivo,'b')
+    
+    def leer_archivo_texto(self, ruta_archivo):        
+        return self._leer_archivo_generico(ruta_archivo)
+    
+    def leer_archivo_json(self, ruta_archivo):
         if not self.existe(ruta_archivo):
             return None
-        with open(ruta_archivo, 'rb') as archivo:
-            contenido = archivo.read()
+        with open(ruta_archivo, 'r') as archivo:
+            contenido = json.load(archivo)
         return contenido
 
     def escribir_archivo(self, ruta_archivo, contenido):
-        with open(ruta_archivo, 'wb') as archivo:
+        self._escribir_archivo_generico(ruta_archivo, contenido,'b')
+        
+    def escribir_archivo_texto(self, ruta_archivo, contenido):
+        self._escribir_archivo_generico(ruta_archivo, contenido)
+            
+    def _leer_archivo_generico(self, ruta_archivo,modo=''):
+        if not self.existe(ruta_archivo):
+            return None
+        with open(ruta_archivo, 'r'+modo) as archivo:
+            contenido = archivo.read()
+        return contenido
+    
+    def _escribir_archivo_generico(self, ruta_archivo, contenido, modo =''):
+        with open(ruta_archivo, 'w' +modo) as archivo:
             archivo.write(contenido)
 
     def marca_temporal(self):
@@ -45,8 +65,7 @@ class Fichero():
         # Se extrae la extensión del archivo
         extension = os.path.splitext(nombre_archivo)[1]
         # Se concatena la extensión con la marca temporal
-        nombre_archivo = nombre_archivo[:-
-                                        len(extension)] +'_'+ marca_temporal + extension
+        nombre_archivo = nombre_archivo[:-len(extension)] +'_'+ marca_temporal + extension
         return nombre_archivo
   
     def crear_copia_de_seguridad(self):
@@ -113,3 +132,21 @@ class Fichero():
          with open(ruta, 'w') as archivo:
             for clave, valor in diccionario.items():
                 archivo.write(f"{clave}={valor}\n")
+                
+    def _guardar_clave_fichero(self, data, nombre,  path = None):
+        clave =json.dumps(data, indent=2)
+        if path is None:
+            path = conf.DIR_DOCUMENTOS + os.path.sep + nombre 
+        self.escribir_archivo_texto(path, clave)
+        
+    def importar_clave_publica_fichero(self, ruta_archivo):
+        try:
+            contenido = self.leer_archivo_json(ruta_archivo)
+            if not contenido:
+                return None, None
+            correo_electronico = contenido.get("correo_electronico")
+            clave_publica = contenido.get("clave_publica")
+            return clave_publica, correo_electronico
+        except Exception as e:
+            print(f"Error al importar clave pública: {str(e)}")
+            return None, None

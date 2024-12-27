@@ -1,4 +1,3 @@
-
 from utils.espannol_string_argparse import *
 import argparse
 from utils.locale_manager import _,p
@@ -107,6 +106,10 @@ class CifraDescifra():
            if self._exportar_clave_publica():
                 print(_('La clave pública se ha exportado correctamente.'),'\n')  
            else:  print(_('No hay ninguna clave pública para exportar'),'\n')   
+        elif args.importar_clave:
+            self._importar_clave_publica(args.importar_clave)
+        elif args.listar_claves:
+            self._listar_claves_publicas()
         else:
             print(_('No se especificó ninguna opción'))
             
@@ -199,14 +202,60 @@ class CifraDescifra():
             else: break    
         clave_cifrada =  self._cifrado_doble_capa.cifrar_clave(bytes(contrasenna, "utf-8"))
         self._contrasenna_service.establecer_contrasenna(clave_cifrada)          
-    def _exportar_clave_publica(self):        
-        print(_('Se exportará a un fichero la clave pública '),'\n')
-        conexion_bd = ConexionBdSqlite() 
-        clave_publica  = conexion_bd.obtener_clave_publica()    
+    def _exportar_clave_publica(self):  
+        print(_('Se exportará a un fichero la clave pública'),'\n')
+        conexion_bd = ConexionBdSqlite()
+        clave_publica, correo = conexion_bd.obtener_clave_publica_correo()
+        
         if clave_publica is not None:
-            self._cifrado_asimetrico.exportar_clave_publica_fichero(clave_publica)            
-            return True         
-        return False   
+            if correo is None:
+                correo = input(_('Por favor, introduzca su correo electrónico: '))
+                conexion_bd.actualizar_correo_electronico(correo)
+            
+            self._cifrado_asimetrico.exportar_clave_publica_fichero(clave_publica, correo) 
+            return True
+        return False
+
+    def _importar_clave_publica(self, archivo_clave):
+        print(_('Se importará la clave pública desde el archivo'), archivo_clave, '\n')
+        
+        clave_publica, correo = self._cifrado_asimetrico.importar_clave_publica_fichero(archivo_clave)
+        if clave_publica and correo:
+            conexion_bd = ConexionBdSqlite()
+            
+            if conexion_bd.existe_correo(correo):
+                respuesta = input(_('Ya existe una clave pública para el correo {}. ¿Desea reemplazarla? (s/n): ').format(correo))
+                if respuesta.lower() in (_('s'), _('sí')):
+                    conexion_bd.actualizar_clave_publica(clave_publica, correo)
+                    print(_('Clave pública actualizada para el correo {}').format(correo))
+                else:
+                    print(_('Operación cancelada'))
+                    return False
+            else:
+                descripcion = input(_('Descripción (opcional): '))
+                if not descripcion.strip():
+                    descripcion = None
+                conexion_bd.insertar_clave_publica(clave_publica, correo, descripcion)
+                print(_('Clave pública importada correctamente'))
+            return True
+        else:
+            print(_('Error al importar la clave pública'))
+            return False
+
+    def _listar_claves_publicas(self):
+        print(_('Listado de claves públicas importadas:'),'\n')
+        conexion_bd = ConexionBdSqlite()
+        claves = conexion_bd.obtener_listado_claves_publicas()
+        
+        if not claves:
+            print(_('No hay claves públicas importadas'))
+            return
+            
+        for correo, descripcion in claves:
+            print(f"- {_('Correo')}: {correo}")
+            if descripcion:
+                print(f"  {_('Descripción')}: {descripcion}")
+            print()
 
     def _get_parser(self):
         
@@ -233,13 +282,13 @@ class CifraDescifra():
         group.add_argument(
             '-t', '--tipo-cifrado', action='store_true', help=_('Selecciona el tipo de cifrado por defecto'))
         group.add_argument(
-            '-E', '--exportar-clave', type=str,
-                           metavar=_('NOMBRE_ARCHIVO'), help=_('Exporta tu clave pública'))
+            '-E', '--exportar-clave', action='store_true',
+                           help=_('Exporta tu clave pública'))
         group.add_argument('-cc', '--compartir', nargs=argparse.ONE_OR_MORE, metavar=(
             _('ARCHIVO'), _('CORREO_1, CORREO_2')), help=_('Cifrar archivo para compartirlo'))
-        group.add_argument(
-            '-ic', '--importar-clave', type=str,
-                           metavar=_('ARCHIVO_CLAVE'), help=_('Importa una clave pública de otro usuario'))
+        group.add_argument('-ic', '--importar-clave',
+                         metavar=_('ARCHIVO_CLAVE'),
+                         help=_('Importar clave pública desde archivo'))
         group.add_argument(
             '-l', '--listar-claves', action='store_true', help=_('Lista los correos de las claves públicas'))
         group.add_argument(

@@ -1,9 +1,8 @@
-
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
 from constantes import Configuracion as conf
 from service.fichero_service import Fichero
-# pip install rsa
+
 class CifradoAsimetrico():
     
     def __init__(self):
@@ -42,11 +41,13 @@ class CifradoAsimetrico():
     def exportar_clave_privada_fichero(self, clave, path = None):
        return self._guardar_clave_fichero(clave, conf.NOMBRE_ARCHIVO_CLAVE_PRIVADA, path )
    
-    def exportar_clave_publica_fichero(self, clave, path = conf.DIR_DOCUMENTOS):
-        print(clave,path);
-        return self._guardar_clave_fichero(clave, conf.NOMBRE_ARCHIVO_CLAVE_PUBLICA, path )
+    def exportar_clave_publica_fichero(self, clave, correo, path=None):
+        data = {
+            "clave_publica": clave.decode() if isinstance(clave, bytes) else clave,
+            "correo_electronico": correo
+        }
+        return self._fichero._guardar_clave_fichero(data, conf.NOMBRE_ARCHIVO_CLAVE_PUBLICA, path )
    
-    def _guardar_clave_fichero(self, clave, nombre,  path = None):
-        if path is None:
-            path = conf.DIR_DOCUMENTOS + nombre 
-        self._fichero.escribir_archivo(path, clave)
+    def importar_clave_publica_fichero(self, ruta_archivo):
+        return self._fichero.importar_clave_publica_fichero(ruta_archivo)
+        

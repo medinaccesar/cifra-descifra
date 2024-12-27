@@ -17,7 +17,7 @@ class ConexionBdSqlite(ConexionBd):
         conn.close()
     
     def _poblar_tablas(self,cursor, privada, publica):
-          cursor.execute('INSERT INTO clave_publica_privada (id, clave_publica,clave_privada) VALUES (?, ?, ?)', ('1', publica, privada))
+          cursor.execute('INSERT INTO clave_publica_privada (id, clave_publica, clave_privada, correo_electronico) VALUES (?, ?, ?, ?)', ('1', publica, privada, None))
             
     def _crear_tablas(self, cursor):
         cursor.execute('''
@@ -32,7 +32,8 @@ class ConexionBdSqlite(ConexionBd):
         cursor.execute('''CREATE TABLE IF NOT EXISTS clave_publica_privada (
                     id INTEGER PRIMARY KEY,
                     clave_publica TEXT NOT NULL,
-                    clave_privada TEXT NOT NULL)''')
+                    clave_privada TEXT NOT NULL,
+                    correo_electronico TEXT)''')
         
         cursor.execute('''CREATE TABLE IF NOT EXISTS claves_publicas (
                     id INTEGER PRIMARY KEY,
@@ -80,6 +81,15 @@ class ConexionBdSqlite(ConexionBd):
         conn.close()
         return clave_cifrada, adicional_cifrado
     
+    def obtener_clave_publica_correo(self):
+        conn, cursor = self.connect()     
+        cursor.execute('SELECT clave_publica, correo_electronico FROM clave_publica_privada where id = ?', ('1',))
+        fila = cursor.fetchone()
+        clave_publica = None if fila is None else fila[0]
+        correo_electronico = None if fila is None else fila[1]
+        conn.close()
+        return clave_publica, correo_electronico
+
     def obtener_clave_publica_clave_privada(self):
         conn, cursor = self.connect()     
         cursor.execute('SELECT clave_publica,clave_privada  FROM clave_publica_privada where id = ?', ('1'))
@@ -125,3 +135,37 @@ class ConexionBdSqlite(ConexionBd):
         cursor.execute(sentencia, ( '0', None,'1'))
         conn.commit()
         conn.close()
+
+    def actualizar_correo_electronico(self, correo):
+        conn, cursor = self.connect()
+        cursor.execute('UPDATE clave_publica_privada SET correo_electronico = ? WHERE id = ?', (correo, '1'))
+        conn.commit()
+        conn.close()
+
+    def insertar_clave_publica(self, clave_publica, correo, descripcion=None):
+        conn, cursor = self.connect()
+        cursor.execute('INSERT INTO claves_publicas (clave_publica, correo, descripcion) VALUES (?, ?, ?)', 
+                      (clave_publica, correo, descripcion))
+        conn.commit()
+        conn.close()
+
+    def existe_correo(self, correo):
+        conn, cursor = self.connect()
+        cursor.execute('SELECT COUNT(*) FROM claves_publicas WHERE correo = ?', (correo,))
+        count = cursor.fetchone()[0]
+        conn.close()
+        return count > 0
+
+    def actualizar_clave_publica(self, clave_publica, correo):
+        conn, cursor = self.connect()
+        cursor.execute('UPDATE claves_publicas SET clave_publica = ? WHERE correo = ?', 
+                      (clave_publica, correo))
+        conn.commit()
+        conn.close()
+
+    def obtener_listado_claves_publicas(self):
+        conn, cursor = self.connect()
+        cursor.execute('SELECT correo, descripcion FROM claves_publicas')
+        claves = cursor.fetchall()
+        conn.close()
+        return claves
