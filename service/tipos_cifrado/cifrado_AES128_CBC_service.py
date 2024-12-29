@@ -18,7 +18,7 @@ class CifraDescifraArchivoAES128CBC(CifraDescifraArchivo):
             return False
         if callback:callback(20) # Avance de la barra de progreso en el entorno gráfico
         # Se genera una clave secreta
-        clave = Fernet.generate_key()
+        clave = self.get_clave()
         # Se crea un objeto Fernet con la clave secreta
         fernet = Fernet(clave)
         # Se cifra el contenido del archivo
@@ -51,3 +51,6 @@ class CifraDescifraArchivoAES128CBC(CifraDescifraArchivo):
         self._fichero.escribir_archivo(nombre_archivo_descifrado, contenido_descifrado)
         if callback: callback(5)    
         return True
+    
+    def get_clave(self):
+        return Fernet.generate_key()

@@ -19,5 +19,9 @@ class CifraDescifraArchivo(metaclass=ABCMeta):
     def descifrar_archivo(self, ruta_archivo_cifrado, nombre_archivo_descifrado, callback = None):
         pass
     
+    @abstractmethod
+    def get_clave(self):
+        pass
+    
     def getTipoCifrado(self):
         return self._tipocifrado
