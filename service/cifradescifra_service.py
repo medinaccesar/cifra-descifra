@@ -10,6 +10,10 @@ class CifraDescifraArchivo(metaclass=ABCMeta):
         self._hash_service = HashService()
         self._fichero = Fichero()       
         self._tipocifrado = ''
+
+    @abstractmethod
+    def cifrar(self, contenido):
+        pass
    
     @abstractmethod
     def cifrar_archivo(self, ruta_archivo, ruta_archivo_cifrado, callback = None):
@@ -20,8 +24,15 @@ class CifraDescifraArchivo(metaclass=ABCMeta):
         pass
     
     @abstractmethod
-    def get_clave(self):
+    def crear_clave(self):
+        pass
+    @abstractmethod
+    def crear_iv(self):
         pass
     
-    def getTipoCifrado(self):
+    @abstractmethod
+    def get_adicional(self):
+        pass
+    
+    def get_tipo_cifrado(self):
         return self._tipocifrado

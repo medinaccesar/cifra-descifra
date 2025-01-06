@@ -17,18 +17,15 @@ class CifraDescifraArchivoAES128CBC(CifraDescifraArchivo):
         if contenido is None:
             return False
         if callback:callback(20) # Avance de la barra de progreso en el entorno gráfico
-        # Se genera una clave secreta
-        clave = self.get_clave()
-        # Se crea un objeto Fernet con la clave secreta
-        fernet = Fernet(clave)
+        self.crear_clave()
         # Se cifra el contenido del archivo
-        contenido_cifrado = fernet.encrypt(contenido)
+        contenido_cifrado = self.cifrar(contenido)
         if callback: callback(40)
-        clave_cifrada = self._cifrado_doble_capa.cifrar_clave(clave)        
+        clave_cifrada = self._cifrado_doble_capa.cifrar_clave(self._clave)
         self._fichero.escribir_archivo(ruta_archivo_cifrado, contenido_cifrado)
         if callback: callback(25)        
         hash_archivo = self._hash_service.calcular_hash_archivo(ruta_archivo_cifrado)       
-        conexion_bd.insertar_registro(hash_archivo, clave_cifrada,'0', self.getTipoCifrado())
+        conexion_bd.insertar_registro(hash_archivo, clave_cifrada,'0', self._tipocifrado)
         if callback: callback(5)
         return True
 
@@ -51,6 +48,19 @@ class CifraDescifraArchivoAES128CBC(CifraDescifraArchivo):
         self._fichero.escribir_archivo(nombre_archivo_descifrado, contenido_descifrado)
         if callback: callback(5)    
         return True
+    def cifrar(self, contenido):
+        fernet = Fernet(self._clave)
+        return fernet.encrypt(contenido)
     
-    def get_clave(self):
-        return Fernet.generate_key()
+    def crear_clave(self):
+        self._clave =  Fernet.generate_key()
+        return self._clave
+    
+    def get_clave(self):        
+        return self._clave
+
+    def crear_iv(self):
+        return ''
+
+    def get_adicional(self):
+        return  ''

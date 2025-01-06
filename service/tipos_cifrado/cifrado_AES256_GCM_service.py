@@ -12,7 +12,8 @@ class CifraDescifraArchivoAES256GCM(CifraDescifraArchivo):
 
     def __init__(self):
         super().__init__()
-        self._tipocifrado = conf.CIFRADO_AES256_GCM
+        self._tipocifrado = conf.CIFRADO_AES256_GCM        
+   
 
     def cifrar_archivo(self, ruta_archivo, ruta_archivo_cifrado, callback = None):
         conexion_bd = ConexionBdSqlite()
@@ -21,12 +22,12 @@ class CifraDescifraArchivoAES256GCM(CifraDescifraArchivo):
             return False
         if callback:callback(20) # Avance de la barra de progreso en el entorno gráfico
         # Se genera una clave secreta y un vector de inicialización
-        clave = self.get_clave()      
-        iv = self.get_iv()
-        contenido_cifrado, tag = self.get_contenido_cigrado_tag(contenido, clave, iv)        
+        clave = self.crear_clave()      
+        iv = self.crear_iv()
+        contenido_cifrado = self.cifrar(contenido)        
         if callback: callback(40)        
         clave_cifrada = self._cifrado_doble_capa.cifrar_clave(clave)        
-        iv_cifrado = self._cifrado_doble_capa.cifrar_clave(iv+tag)        
+        iv_cifrado = self._cifrado_doble_capa.cifrar_clave(iv+self._tag)        
         self._fichero.escribir_archivo(ruta_archivo_cifrado, contenido_cifrado)
         if callback: callback(25)        
         hash_archivo = self._hash_service.calcular_hash_archivo(ruta_archivo_cifrado)       
@@ -59,19 +60,27 @@ class CifraDescifraArchivoAES256GCM(CifraDescifraArchivo):
         self._fichero.escribir_archivo(nombre_archivo_descifrado, contenido_descifrado)
         if callback: callback(5)
         return True
+    
+    def crear_clave(self):
+        self._clave =  os.urandom(32)
+        return self._clave
    
     def get_clave(self):
-        return os.urandom(32)
+        return self._clave
     
-    def get_iv(self):
-        return os.urandom(16)  # Se aconseja para GCM 12, estándar NIST 
+    def crear_iv(self):
+        self._iv =  os.urandom(16)  # Se aconseja para GCM 12, estándar NIST 
+        return self._iv   
     
-    def get_contenido_cigrado_tag(self,contenido, clave, iv):
+    def get_adicional(self):
+        return self._iv + self._tag
+    
+    def cifrar(self,contenido):
         # Se crea un objeto con la clave secreta
-        cipher = Cipher(algorithms.AES(clave), modes.GCM(iv), backend=default_backend())        
+        cipher = Cipher(algorithms.AES(self._clave), modes.GCM(self._iv), backend=default_backend())        
         encryptor = cipher.encryptor()        
         padder = padding.PKCS7(128).padder()
         padded_data = padder.update(contenido) + padder.finalize()
         contenido_cifrado = encryptor.update(padded_data) + encryptor.finalize()
-        tag = encryptor.tag
-        return contenido_cifrado, tag
+        self._tag = encryptor.tag
+        return contenido_cifrado

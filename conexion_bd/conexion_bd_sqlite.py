@@ -89,6 +89,14 @@ class ConexionBdSqlite(ConexionBd):
         correo_electronico = None if fila is None else fila[1]
         conn.close()
         return clave_publica, correo_electronico
+    def obtener_clave_privada_correo(self):
+        conn, cursor = self.connect()
+        cursor.execute('SELECT clave_privada, correo_electronico FROM clave_publica_privada where id = ?', ('1',))
+        fila = cursor.fetchone()
+        clave_privada= None if fila is None else fila[0]
+        correo_electronico = None if fila is None else fila[1]
+        conn.close()
+        return clave_privada, correo_electronico
 
     def obtener_clave_publica_clave_privada(self):
         conn, cursor = self.connect()     
@@ -169,3 +177,11 @@ class ConexionBdSqlite(ConexionBd):
         claves = cursor.fetchall()
         conn.close()
         return claves
+
+    def obtener_clave_publica_por_correo(self, correo):
+        conn, cursor = self.connect()
+        cursor.execute('SELECT clave_publica FROM claves_publicas WHERE correo = ?', (correo,))
+        fila = cursor.fetchone()
+        clave_publica = None if fila is None else fila[0]
+        conn.close()
+        return clave_publica

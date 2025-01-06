@@ -3,7 +3,7 @@ from Crypto.Cipher import PKCS1_OAEP
 from constantes import Configuracion as conf
 from service.fichero_service import Fichero
 
-class CifradoAsimetrico():
+class CifradoAsimetrico:
     
     def __init__(self):
         self._fichero = Fichero()
@@ -28,7 +28,9 @@ class CifradoAsimetrico():
     def cifrar(self, message, public_key):
         public_key = RSA.import_key(public_key) 
         cipher = PKCS1_OAEP.new(public_key)
-        encrypted_message = cipher.encrypt(message.encode())
+        if isinstance(message, str):
+            message = message.encode()
+        encrypted_message = cipher.encrypt(message)
         return encrypted_message
     
     def descifrar(self,encrypted_message, private_key):

@@ -18,13 +18,10 @@ class CifraDescifraArchivoXChachaPoly(CifraDescifraArchivo):
             return False
         if callback:callback(20) # Avance de la barra de progreso en el entorno gráfico
         # Se genera una clave secreta y un número de un solo uso   
-        clave = self.getClave()
-        nonce = os.urandom(12) 
-        cipher = ChaCha20Poly1305(clave)                 
+        clave = self.crear_clave()
         # Se cifra el contenido del archivo
-        contenido_cifrado =  cipher.encrypt(nonce, contenido)
+        contenido_cifrado =  self.cifrar(contenido)
         if callback: callback(40)
-        contenido_cifrado =  nonce + contenido_cifrado        
         clave_cifrada = self._cifrado_doble_capa.cifrar_clave(clave)      
              
         self._fichero.escribir_archivo(ruta_archivo_cifrado, contenido_cifrado)
@@ -56,5 +53,20 @@ class CifraDescifraArchivoXChachaPoly(CifraDescifraArchivo):
         if callback: callback(5)
         return True
     
-    def getClave(self):
-        return os.urandom(32)
+    def crear_clave(self):
+        self._clave =  os.urandom(32)
+        return self._clave
+
+    def cifrar(self, contenido):
+        nonce = os.urandom(12)
+        cipher = ChaCha20Poly1305(self._clave)
+        return nonce + cipher.encrypt(nonce, contenido)
+
+    def crear_iv(self):
+        return ''
+
+    def get_adicional(self):
+        return ''
+    
+    def get_clave(self):
+        return self._clave

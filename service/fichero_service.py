@@ -7,7 +7,7 @@ from dotenv import dotenv_values
 from constantes import Configuracion as conf
 from datetime import datetime
 
-class Fichero():
+class Fichero:
     
     def leer_archivo(self, ruta_archivo):        
         return self._leer_archivo_generico(ruta_archivo,'b')
@@ -54,6 +54,10 @@ class Fichero():
             return nombre_archivo[:-14]
         else:          
             return nombre_archivo
+
+    def obtener_nombre(self, ruta):
+        nombre_archivo = os.path.basename(ruta)
+        return nombre_archivo
 
     def obtener_nombre_original(self, nombre_archivo):
         nombre_archivo = self.quitar_ext_cifrado(nombre_archivo)
@@ -150,3 +154,7 @@ class Fichero():
         except Exception as e:
             print(f"Error al importar clave pública: {str(e)}")
             return None, None
+    def exportar_archivo_compartido(self, ruta_archivo, contenido):
+        contenido_json = json.dumps(contenido, indent=4)
+        with open(ruta_archivo, 'w') as fichero:
+            fichero.write(contenido_json)

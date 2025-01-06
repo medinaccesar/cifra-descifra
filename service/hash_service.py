@@ -2,7 +2,7 @@ import hashlib
 import os
 from constantes import Configuracion as conf
 
-class HashService():
+class HashService:
            
     # Calcula el hash del archivo
     def calcular_hash_archivo(self, ruta_archivo):

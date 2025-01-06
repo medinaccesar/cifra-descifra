@@ -1,3 +1,4 @@
+from service.compartir_archivo_service import CompartirArchivo
 from utils.espannol_string_argparse import *
 import argparse
 from utils.locale_manager import _,p
@@ -23,6 +24,7 @@ class CifraDescifra():
         self._contrasenna_service = ContrasennaService()
         self._fichero = Fichero()
         self._instanciar_tipo_cifrado()
+        self._compartir_archivo = CompartirArchivo(self._cifra_descifra_archivo)
         self._comprobar_bd()
        
         self._procesar_argumentos()
@@ -110,6 +112,20 @@ class CifraDescifra():
             self._importar_clave_publica(args.importar_clave)
         elif args.listar_claves:
             self._listar_claves_publicas()
+        elif args.compartir is not None:
+            barra_progreso = BarraProgresoConsola(100)
+            nombre_archivo, lista_correos = args.compartir
+            if self._compartir_archivo.exportar(nombre_archivo,lista_correos,barra_progreso.dibuja_bp):
+                print(_('El archivo compartido se ha exportado correctamente.'), '\n')
+            else:
+                print(_('El archivo compartido no se ha podido exportar.'), '\n')
+        elif args.importar_archivo_compartido is not None:
+            barra_progreso = BarraProgresoConsola(100)
+            nombre_archivo = args.importar_archivo_compartido
+            if self._compartir_archivo.importar(nombre_archivo,barra_progreso.dibuja_bp):
+                print(_('El archivo compartido se ha importado correctamente.'), '\n')
+            else:
+                print(_('El archivo compartido no se ha podido importar.'), '\n')
         else:
             print(_('No se especificó ninguna opción'))
             
@@ -287,8 +303,11 @@ class CifraDescifra():
         group.add_argument('-cc', '--compartir', nargs=argparse.ONE_OR_MORE, metavar=(
             _('ARCHIVO'), _('CORREO_1, CORREO_2')), help=_('Cifrar archivo para compartirlo'))
         group.add_argument('-ic', '--importar-clave',
-                         metavar=_('ARCHIVO_CLAVE'),
-                         help=_('Importar clave pública desde archivo'))
+                         metavar=_('ARCHIVO'),
+                         help=_('Importar clave pública desde un archivo'))
+        group.add_argument('-ia', '--importar-archivo-compartido',
+                         metavar=_('ARCHIVO'),
+                         help=_('Importar un archivo compartido a la base de datos'))
         group.add_argument(
             '-l', '--listar-claves', action='store_true', help=_('Lista los correos de las claves públicas'))
         group.add_argument(

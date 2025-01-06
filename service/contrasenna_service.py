@@ -1,7 +1,7 @@
 from conexion_bd.conexion_bd_sqlite import ConexionBdSqlite
 from constantes import Configuracion as conf
 
-class ContrasennaService():
+class ContrasennaService:
     
     def establecer_contrasenna(self, clave_cifrada):  
         conexion_bd = ConexionBdSqlite()      
