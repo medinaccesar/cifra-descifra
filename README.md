@@ -12,7 +12,7 @@ Novedades de la versión 2:
     2) AES256_GCM
     3) XChaCha20_Poly1305 (Más lento en las pruebas)
 
-    Se puede establecer también uno por defecto.
+    Se establece uno por defecto, opción -t.
 
     Por otra parte se utiliza un cifrado de doble capa de cada una de las claves que se generan en cada operación de cifrado, primero se cifran con AES_GCM y el resultado con AES128_CBC.  
 
@@ -20,7 +20,7 @@ Novedades de la versión 2:
 
 3) Permite generar  un fichero para poder compartir un archivo cifrado con otros usuarios, para ello se hace uso del cifrado asimétrico con llave pública y privada. Se podrán importar las llaves públicas de otros usuarios para poder generar estos ficheros en los que se cifrará la clave, (con la que se cifra el archivo),  con la clave pública de cada uno de los usuarios a los que se pretenda compartir, de esta forma  otros usuarios podrán importarlo, descifrarlo con su clave privada, alimentar su aplicación y en definitiva descifrar el archivo.
 
-4) Mejora de la interfaz gráfica
+4) Mejora de la interfaz gráfica (Por hacer)
 
 
 
