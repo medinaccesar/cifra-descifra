@@ -23,9 +23,6 @@ Novedades de la versión 2:
 4) Mejora de la interfaz gráfica (Por hacer)
 
 
-
-Nota*: Nueva versión ![2.0.0](https://github.com/medinaccesar/cifra-descifra) ![Static Badge](https://img.shields.io/badge/status-En%20desarrollo-brightgreen)
-
 # Requisitos
  Python 3.
  
