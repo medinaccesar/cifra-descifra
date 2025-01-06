@@ -10,7 +10,7 @@ Novedades de la versión 2:
 1) Permite elegir el tipo de cifrado:
     1) AES128_CBC
     2) AES256_GCM
-    3) XChaCha20_Poly1305 (Más lento en las pruebas)
+    3) XChaCha20_Poly1305 (mucho más lento)
 
     Se establece uno por defecto, opción -t.
 
@@ -210,6 +210,7 @@ IDIOMA = 'pt'
 # Líneas futuras
 
 1) Interfaz gráfica
-2) Aplicación móvil
-3) Explorar compartir las claves públicas en una cadena de bloques
+2) Cifrar contenido de directorios
+3) Aplicación móvil
+4) Explorar compartir las claves públicas en una cadena de bloques
 
