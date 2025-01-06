@@ -85,22 +85,6 @@ python cifradescifra.py -c archivo.pdf archivo.pdf.cifrado
 Se ejecuta en modo consola
 Progreso |████████████████████████████████████████| 100% Completo
 El archivo se ha cifrado correctamente.
-
-## Descifrar un archivo en modo consola
-python cifradescifra.py -d archivo.pdf.cifrado archivo.pdf
-Se ejecuta en modo consola
-Progreso |████████████████████████████████████████| 100% Completo
-El archivo se ha descifrado correctamente.
-
-## Cifrar o descifrar un archivo en modo gáfico 
-python cifradescifra.py -g
-
-## Establecer el tipo de cifrado por defecto
-python cifradescifra.py -t
-Se ejecuta en modo consola. 
-
-¿Elija el tipo de cifrado? (AES128_CBC/AES256_GCM/XChaCha20_Poly1305) o (c/g/x): g
-
 ```
 * **Descifrar un archivo en modo consola:**
 ``` 
