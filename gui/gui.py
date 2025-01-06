@@ -7,7 +7,7 @@ from tkinter.ttk import Progressbar
 from tkinter import PhotoImage
 from service.fichero_service import Fichero
 from utils.locale_manager import _
-from service.cifradescifra_service import CifraDescifraArchivo
+from service.tipos_cifrado.cifrado_AES256_GCM_service import CifraDescifraArchivoAES256GCM
 from constantes import Configuracion as conf
 
 class Gui(Frame):
@@ -16,7 +16,7 @@ class Gui(Frame):
         
         super().__init__(master)
         
-        self._cifra_descifra_archivo = CifraDescifraArchivo()
+        self._cifra_descifra_archivo = CifraDescifraArchivoAES256GCM()
         self._fichero = Fichero()
         self._ruta_archivo = ''
         self.master.title(conf.NOMBRE_AP) 
@@ -28,7 +28,8 @@ class Gui(Frame):
         self.addMenu()
         
         self.pack()
-        
+    def set_cifra_descifra_archivo(self,cifra_descifra_archivo):    
+        self._cifra_descifra_archivo = cifra_descifra_archivo
     def addMenu(self):
         menu = Menu(self)
        
