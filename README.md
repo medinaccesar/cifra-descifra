@@ -1,5 +1,7 @@
+
 ![Static Badge](https://img.shields.io/badge/status-En%20desarrollo-brightgreen)
 # cifra-descifra v2.0.0 
+
 Permite cifrar y descifrar archivos, puede ejecutarse en modo consola, en modo guiado o en modo gráfico. Por defecto está en español pero admite otros idiomas.
 El cifrado se hace con una clave única que se genera para cada operación de cifrado, estas claves se gestionan internamente y están, a su vez, cifradas con una clave derivada de una clave maestra configurable.
 
@@ -19,6 +21,10 @@ Novedades de la versión 2:
 3) Permite generar  un fichero para poder compartir un archivo cifrado con otros usuarios, para ello se hace uso del cifrado asimétrico con llave pública y privada. Se podrán importar las llaves públicas de otros usuarios para poder generar estos ficheros en los que se cifrará la clave, (con la que se cifra el archivo),  con la clave pública de cada uno de los usuarios a los que se pretenda compartir, de esta forma  otros usuarios podrán importarlo, descifrarlo con su clave privada, alimentar su aplicación y en definitiva descifrar el archivo.
 
 4) Mejora de la interfaz gráfica
+
+
+
+Nota*: Nueva versión ![2.0.0](https://github.com/medinaccesar/cifra-descifra) ![Static Badge](https://img.shields.io/badge/status-En%20desarrollo-brightgreen)
 
 # Requisitos
  Python 3.
@@ -47,6 +53,7 @@ Uso: cifradescifra.py [-h]
                       | -cc ARCHIVO [CORREO_1, CORREO_2 ...]
                       | -ic ARCHIVO_CLAVE | -l | -i] [--version]
 
+
 Cifradescifra 2.0.0
 
 argumentos opcionales:
@@ -73,10 +80,27 @@ Por ejemplo:
 
 * **Cifrar un archivo en modo consola:**
 ```
+## Cifrar un archivo en modo consola
 python cifradescifra.py -c archivo.pdf archivo.pdf.cifrado
 Se ejecuta en modo consola
 Progreso |████████████████████████████████████████| 100% Completo
 El archivo se ha cifrado correctamente.
+
+## Descifrar un archivo en modo consola
+python cifradescifra.py -d archivo.pdf.cifrado archivo.pdf
+Se ejecuta en modo consola
+Progreso |████████████████████████████████████████| 100% Completo
+El archivo se ha descifrado correctamente.
+
+## Cifrar o descifrar un archivo en modo gáfico 
+python cifradescifra.py -g
+
+## Establecer el tipo de cifrado por defecto
+python cifradescifra.py -t
+Se ejecuta en modo consola. 
+
+¿Elija el tipo de cifrado? (AES128_CBC/AES256_GCM/XChaCha20_Poly1305) o (c/g/x): g
+
 ```
 * **Descifrar un archivo en modo consola:**
 ``` 
@@ -201,6 +225,7 @@ IDIOMA = 'pt'
 
 # Líneas futuras
 
-1) Aplicación móvil
-2) Explorar compartir las claves públicas en una cadena de bloques
-3) Explorar aceleración por «Hardware» para las operaciones de cifrado
+1) Interfaz gráfica
+2) Aplicación móvil
+3) Explorar compartir las claves públicas en una cadena de bloques
+
