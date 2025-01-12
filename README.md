@@ -197,7 +197,7 @@ cifra-descifra/
 ```
 Subsequently, the translation file is compiled by executing:
 ```
-python compile_lang.py 
+python utils/compile_lang.py 
 ```
 The application language is set in the .env file:
 ```
