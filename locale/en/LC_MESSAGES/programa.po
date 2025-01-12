@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-11 13:10+0200\n"
-"PO-Revision-Date: 2023-06-11 23:32+0200\n"
+"POT-Creation-Date: 2025-01-12 12:36+0100\n"
+"PO-Revision-Date: 2025-01-12 13:12+0100\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,102 +18,294 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: en\n"
 
-#: cifradescifra.py:40
-msgid "Se ejecuta en modo consola"
-msgstr "Runs in console mode"
+#: cifradescifra.py:50
+msgid "Se ejecuta en modo consola."
+msgstr "Running in console mode."
 
-#: cifradescifra.py:47 gui/gui.py:128
+#: cifradescifra.py:58 cifradescifra.py:147 gui/gui.py:131
 msgid "El archivo se ha cifrado correctamente."
 msgstr "The file has been successfully encrypted."
 
-#: cifradescifra.py:55 cifradescifra.py:97 gui/gui.py:140
+#: cifradescifra.py:60
+msgid "El archivo no se ha podido cifrar."
+msgstr "The file could not be encrypted."
+
+#: cifradescifra.py:68 cifradescifra.py:157 gui/gui.py:143
 msgid "El archivo se ha descifrado correctamente."
 msgstr "The file has been successfully decrypted."
 
-#: cifradescifra.py:60
+#: cifradescifra.py:70
+msgid "El archivo no se ha podido descifrar."
+msgstr "The file could not be decrypted."
+
+#: cifradescifra.py:74
+msgid "La contraseña se ha establecido correctamente."
+msgstr "The password has been set correctly."
+
+#: cifradescifra.py:77
+msgid "La contraseña se ha desestablecido correctamente."
+msgstr "The password has been successfully reset."
+
+#: cifradescifra.py:80
 msgid "La base de datos se ha copiado correctamente."
 msgstr "The database has been copied successfully."
 
-#: cifradescifra.py:63
+#: cifradescifra.py:83
 msgid "Al restaurar se borrará la base de datos actual, ¿está seguro? (s/n)"
-msgstr "Restoring will delete the current database, are you sure (s/n)?"
+msgstr "Restoring will delete the current database, are you sure (y/n)?"
 
-#: cifradescifra.py:69
+#: cifradescifra.py:89
 msgid "La base de datos se ha restaurado correctamente."
 msgstr "The database has been successfully restored."
 
-#: cifradescifra.py:70
-#, python-brace-format
-msgid "El archivo %s no existe."
-msgstr "The file %s does not exist."
+#: cifradescifra.py:90
+#, fuzzy, python-brace-format
+msgid "El archivo {} no existe."
+msgstr "The file {} does not exist."
 
-#: cifradescifra.py:73
+#: cifradescifra.py:98
+msgid "Opciones establecidas:"
+msgstr "Established options:"
+
+#: cifradescifra.py:101
+msgid "No"
+msgstr "No"
+
+#: cifradescifra.py:104
+msgid "Sí"
+msgstr "Yes"
+
+#: cifradescifra.py:109
+msgid "La clave pública se ha exportado correctamente."
+msgstr "The public key has been successfully exported."
+
+#: cifradescifra.py:110
+msgid "No hay ninguna clave pública para exportar"
+msgstr "There is no public key to export"
+
+#: cifradescifra.py:119
+msgid "El archivo compartido se ha exportado correctamente."
+msgstr "The shared file has been successfully exported."
+
+#: cifradescifra.py:121
+msgid "El archivo compartido no se ha podido exportar."
+msgstr "The shared file could not be exported."
+
+#: cifradescifra.py:126
+msgid "El archivo compartido se ha importado correctamente."
+msgstr "The shared file has been successfully imported."
+
+#: cifradescifra.py:128
+msgid "El archivo compartido no se ha podido importar."
+msgstr "The shared file could not be imported."
+
+#: cifradescifra.py:130
 msgid "No se especificó ninguna opción"
 msgstr "No option was specified"
 
-#: cifradescifra.py:79
+#: cifradescifra.py:136
 msgid "¿Desea cifrar o descifrar un archivo? (cifrar/descifrar) o (c/d): "
 msgstr "Do you want to encrypt or decrypt a file (encrypt/decrypt) or (c/d): "
 
-#: cifradescifra.py:81
+#: cifradescifra.py:141
 msgid "Introduzca el nombre del archivo a cifrar: "
 msgstr "Enter the name of the file to be encrypted: "
 
-#: cifradescifra.py:83
+#: cifradescifra.py:143
 msgid "Introduzca el nombre del archivo cifrado que se va a generar: "
-msgstr "Enter the name of the encrypted file to be generated: "
+msgstr "Enter the name of the encrypted file to be generated "
 
-#: cifradescifra.py:92
+#: cifradescifra.py:151
 msgid "Introduce el nombre del archivo cifrado a descifrar: "
 msgstr "Enter the name of the encrypted file to decrypt: "
 
-#: cifradescifra.py:94
+#: cifradescifra.py:153
 msgid "Introduce el nombre del archivo descifrado que se va a generar: "
 msgstr "Enter the name of the decrypted file to be generated: "
 
-#: cifradescifra.py:99
+#: cifradescifra.py:159
 msgid "La acción introducida no es válida"
 msgstr "The action entered is invalid"
 
-#: cifradescifra.py:107
+#: cifradescifra.py:177
+msgid ""
+"¿Elija el tipo de cifrado? (AES128_CBC/AES256_GCM/XChaCha20_Poly1305) o (c/g/"
+"x): "
+msgstr ""
+"Choose the type of encryption (AES128_CBC/AES256_GCM/XChaCha20_Poly1305) or "
+"(c/g/x): "
+
+#: cifradescifra.py:190 cifradescifra.py:214
+msgid "Intoduzca la contraseña: "
+msgstr "Enter the password: "
+
+#: cifradescifra.py:193 cifradescifra.py:206
+msgid "La contraseña es incorrecta"
+msgstr "The password is incorrect"
+
+#: cifradescifra.py:197
+msgid "Se desestablecerá la contraseña de inicio"
+msgstr "The startup password will be reset"
+
+#: cifradescifra.py:202
+msgid "Para desestablecerla intoduzca antes la contraseña: "
+msgstr "To reset it, enter the password first: "
+
+#: cifradescifra.py:208
+msgid "No hay contraseña que desestablecer"
+msgstr "No password to reset"
+
+#: cifradescifra.py:212
+msgid "Se establecerá una contraseña de inicio"
+msgstr "A startup password will be set"
+
+#: cifradescifra.py:215
+msgid "Repita la contraseña: "
+msgstr "Repeat the password: "
+
+#: cifradescifra.py:217
+msgid "Las contraseñas no coinciden"
+msgstr "Passwords do not match"
+
+#: cifradescifra.py:222
+msgid "Se exportará a un fichero la clave pública"
+msgstr "The public key will be exported to a file"
+
+#: cifradescifra.py:228
+msgid "Por favor, introduzca su correo electrónico: "
+msgstr "Please enter your email address: "
+
+#: cifradescifra.py:236
+msgid "Se importará la clave pública desde el archivo"
+msgstr "The public key will be imported from the"
+
+#: cifradescifra.py:243
+msgid ""
+"Ya existe una clave pública para el correo {}. ¿Desea reemplazarla? (s/n): "
+msgstr ""
+"A public key already exists for the mail {}. Would you like to replace it (y/"
+"n): "
+
+#: cifradescifra.py:244
+msgid "s"
+msgstr "y"
+
+#: cifradescifra.py:244
+msgid "sí"
+msgstr "yes"
+
+#: cifradescifra.py:246
+msgid "Clave pública actualizada para el correo {}"
+msgstr "Updated public key for mail {}"
+
+#: cifradescifra.py:248
+msgid "Operación cancelada"
+msgstr "Operation canceled"
+
+#: cifradescifra.py:251
+msgid "Descripción (opcional): "
+msgstr "Description (optional): "
+
+#: cifradescifra.py:255
+msgid "Clave pública importada correctamente"
+msgstr "Public key successfully imported"
+
+#: cifradescifra.py:258
+msgid "Error al importar la clave pública"
+msgstr "Error importing public key"
+
+#: cifradescifra.py:262
+msgid "Listado de claves públicas importadas:"
+msgstr "List of imported public keys:"
+
+#: cifradescifra.py:267
+msgid "No hay claves públicas importadas"
+msgstr "No imported public keys"
+
+#: cifradescifra.py:282 cifradescifra.py:304 cifradescifra.py:306
+#: cifradescifra.py:309
 msgid "ARCHIVO"
 msgstr "FILE"
 
-#: cifradescifra.py:107 cifradescifra.py:109
+#: cifradescifra.py:282 cifradescifra.py:284
 msgid "ARCHIVO_CIFRADO"
-msgstr "ENCRYPTED_FILE"
+msgstr ""
 
-#: cifradescifra.py:109
+#: cifradescifra.py:284
 msgid "ARCHIVO_DESCIFRADO"
 msgstr "DECRYPTED_FILE"
 
-#: cifradescifra.py:109
+#: cifradescifra.py:284
 msgid "Descifrar archivo"
 msgstr "Decrypt file"
 
-#: cifradescifra.py:111
+#: cifradescifra.py:286
 msgid "Se ejecuta el entorno gráfico"
-msgstr "The graphical environment is executed"
+msgstr "The graphical environment is running"
 
-#: cifradescifra.py:113
+#: cifradescifra.py:288
 msgid "Se ejecuta el modo guiado"
 msgstr "Guided mode is executed"
 
-#: cifradescifra.py:115
+#: cifradescifra.py:290
 msgid "Hace una copia de la base de datos"
 msgstr "Makes a copy of the database"
 
-#: cifradescifra.py:118
+#: cifradescifra.py:293
 msgid "ARCHIVO_COPIA"
 msgstr "COPY_FILE"
 
-#: cifradescifra.py:118
+#: cifradescifra.py:293
 msgid "Restaura una copia de la base de datos"
 msgstr "Restore a copy of the database"
 
-#: cifradescifra.py:120
+#: cifradescifra.py:295
+msgid "Establece una contraseña para ejecutar el programa"
+msgstr "Set a password to run the program"
+
+#: cifradescifra.py:297
+msgid "Desestablece la contraseña"
+msgstr "Reset password"
+
+#: cifradescifra.py:299
+msgid "Selecciona el tipo de cifrado por defecto"
+msgstr "Select the default encryption type"
+
+#: cifradescifra.py:302
+msgid "Exporta tu clave pública"
+msgstr "Export your public key"
+
+#: cifradescifra.py:304
+msgid "CORREO_1, CORREO_2"
+msgstr "EMAIL_1, EMAIL_2"
+
+#: cifradescifra.py:304
+msgid "Cifrar archivo para compartirlo"
+msgstr "Encrypt file for sharing"
+
+#: cifradescifra.py:307
+msgid "Importar clave pública desde un archivo"
+msgstr "Import public key from a file"
+
+#: cifradescifra.py:310
+msgid "Importar un archivo compartido a la base de datos"
+msgstr "Importing a shared file into the database"
+
+#: cifradescifra.py:312
+msgid "Lista los correos de las claves públicas"
+msgstr "List public key emails"
+
+#: cifradescifra.py:314
+msgid "Muesta las opciones establecidas"
+msgstr "Established options"
+
+#: cifradescifra.py:316
 msgid "Muestra la versión del programa"
-msgstr "Shows the program version"
+msgstr "Displays the version of the program"
+
+#: cifradescifra.py:326
+msgid "La opción GUI no está implementada aún"
+msgstr "GUI option not yet implemented"
 
 #: utils/barra_progreso.py:8
 msgid "Progreso"
@@ -125,7 +317,7 @@ msgstr "Complete"
 
 #: utils/espannol_string_argparse.py:13
 msgid "Uso: "
-msgstr "Usage: "
+msgstr "Use "
 
 #: utils/espannol_string_argparse.py:14
 msgid "argumentos opcionales"
@@ -133,7 +325,7 @@ msgstr "optional arguments"
 
 #: utils/espannol_string_argparse.py:15
 msgid "muestra este mensaje de ayuda y sale"
-msgstr "shows this help message and exits"
+msgstr "show this help message and exit"
 
 #: utils/espannol_string_argparse.py:16
 msgid "argumentos posicionales"
@@ -146,7 +338,7 @@ msgstr "the following arguments are required: %s"
 
 #: utils/espannol_string_argparse.py:18
 msgid "muestra la versión del programa y sale"
-msgstr "shows the program version and exits"
+msgstr "show program version and exit"
 
 #: utils/espannol_string_argparse.py:19
 msgid "se espera un valor para el parámetro"
@@ -154,56 +346,52 @@ msgstr "a value is expected for the parameter"
 
 #: utils/espannol_string_argparse.py:20
 msgid "se espera al menos un valor para el parámetro"
-msgstr "at least one value is expected for the parameter"
+msgstr "least one value is expected for the parameter"
 
-#: gui/gui.py:34
+#: gui/gui.py:37
 msgid "Abrir"
 msgstr "Open"
 
-#: gui/gui.py:37 gui/gui.py:77
+#: gui/gui.py:40 gui/gui.py:80
 msgid "Cifrar"
 msgstr "Encrypt"
 
-#: gui/gui.py:38 gui/gui.py:78
+#: gui/gui.py:41 gui/gui.py:81
 msgid "Descifrar"
 msgstr "Decrypt"
 
-#: gui/gui.py:40 gui/gui.py:97
+#: gui/gui.py:43 gui/gui.py:100
 msgid "Ejecutar"
 msgstr "Run"
 
-#: gui/gui.py:42
+#: gui/gui.py:45
 msgid "Salir"
 msgstr "Exit"
 
-#: gui/gui.py:43
+#: gui/gui.py:46
 msgid "Archivo"
 msgstr "File"
 
-#: gui/gui.py:46 gui/gui.py:47
+#: gui/gui.py:49 gui/gui.py:50
 msgid "Acerca de..."
 msgstr "About..."
 
-#: gui/gui.py:49
+#: gui/gui.py:52
 msgid "Ayuda"
 msgstr "Help"
 
-#: gui/gui.py:64
+#: gui/gui.py:67
 msgid "Selecciona el archivo y la operación a realizar"
 msgstr "Select the file and the operation to be performed"
 
-#: gui/gui.py:72
+#: gui/gui.py:75
 msgid "Operación"
 msgstr "Operation"
 
-#: gui/gui.py:87
+#: gui/gui.py:90
 msgid "Selecciona"
 msgstr "Select"
 
-#: gui/gui.py:120 gui/gui.py:133
+#: gui/gui.py:123 gui/gui.py:136
 msgid "No hay un archivo seleccionado"
 msgstr "No file selected"
-
-#: Descripción
-msgid "Cifra y descifra archivos"
-msgstr "Encrypt and decrypt files"

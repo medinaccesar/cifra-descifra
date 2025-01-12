@@ -1,11 +1,13 @@
 import os
 import subprocess
-locale_dir = 'locale'
+from pathlib import Path
+utils_dir = Path(__file__).resolve().parent
+locale_dir = utils_dir / '..' / 'locale'
 
 def compile_po_files():
     for root, dirs, files in os.walk(locale_dir):        
         for file in files:
-            if file.endswith('.po') and root is not locale_dir:
+            if file.endswith('.po') and root is not locale_dir and not file.startswith('template.'):
                 po_file = os.path.join(root, file)
                 #lang = os.path.splitext(po_file)[1][1:]
                 print('Se compila',root)
