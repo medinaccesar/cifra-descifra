@@ -87,7 +87,7 @@ class CifraDescifra():
                 if os.path.exists(nombre_archivo_bd):
                     self._fichero.restaurar_copia_de_seguridad(nombre_archivo_bd)
                     print(_('La base de datos se ha restaurado correctamente.'),'\n')  
-                else: print(_(f'El archivo {nombre_archivo_bd} no existe.'),'\n')    
+                else: print(_('El archivo {} no existe.').format(nombre_archivo_bd),'\n')
         elif args.tipo_cifrado is not None and args.tipo_cifrado is not False:            
            self._establecer_tipo_cifrado()       
         elif args.info is not None and args.info is not False:  

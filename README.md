@@ -174,7 +174,7 @@ cifra-descifra/
 ```
 Posteriormente se compila el archivo de traducción ejecutando:
 ```
-python compile_lang.py 
+python utils/compile_lang.py 
 ```
 El idioma de la aplicación se fija en el archivo .env:
 ```
