@@ -22,6 +22,8 @@ Novedades de la versión 2:
 
 4) Mejora de la interfaz gráfica (Por hacer)
 
+5) Incluir cifrado postcuántico (Haciendo)
+
 
 # Requisitos
  Python 3.
